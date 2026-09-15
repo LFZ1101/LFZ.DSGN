@@ -83,24 +83,30 @@
 
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".nav-toggle");
-  const nav = document.getElementById("nav");
+  const mobileNav = document.getElementById("nav-mobile");
 
   const closeNav = () => {
     document.body.classList.remove("nav-open");
     if (toggle) toggle.setAttribute("aria-expanded", "false");
+    if (mobileNav) mobileNav.hidden = true;
   };
 
-  if (toggle && nav) {
+  const openNav = () => {
+    document.body.classList.add("nav-open");
+    if (toggle) toggle.setAttribute("aria-expanded", "true");
+    if (mobileNav) mobileNav.hidden = false;
+  };
+
+  if (toggle && mobileNav) {
     toggle.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      const open = !document.body.classList.contains("nav-open");
-      document.body.classList.toggle("nav-open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (mobileNav.hidden) openNav();
+      else closeNav();
     });
   }
 
-  nav?.querySelectorAll("a").forEach((link) => {
+  mobileNav?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeNav);
   });
 
