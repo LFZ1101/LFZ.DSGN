@@ -96,6 +96,21 @@
         "images/portfolio/web/landing-pages/6.webp",
       ],
     },
+    dunamis: {
+      title: "Dunamis Wear",
+      label: "E-commerce",
+      description:
+        "E-commerce de moda premium com estética dark luxury. Hero cinematográfico, catálogo limpo e jornada de compra focada em presença e exclusividade — camisetas e polos atemporais.",
+      url: "https://dunamiswear.com.br/",
+      media: [
+        "images/portfolio/web/dunamis/1.webp",
+        "images/portfolio/web/dunamis/2.webp",
+        "images/portfolio/web/dunamis/3.webp",
+        "images/portfolio/web/dunamis/4.webp",
+        "images/portfolio/web/dunamis/5.webp",
+        "images/portfolio/web/dunamis/6.webp",
+      ],
+    },
   };
 
   const yearEl = document.getElementById("year");
@@ -300,6 +315,7 @@
   const lbTitle = document.getElementById("lb-title");
   const lbDesc = document.getElementById("lb-desc");
   const lbLabel = document.getElementById("lb-label");
+  const lbLink = document.getElementById("lb-link");
   const lbGallery = document.getElementById("lb-gallery");
 
   const openProject = (id) => {
@@ -308,6 +324,16 @@
     lbTitle.textContent = project.title;
     lbDesc.textContent = project.description;
     lbLabel.textContent = project.label;
+    if (lbLink) {
+      if (project.url) {
+        lbLink.href = project.url;
+        lbLink.hidden = false;
+        lbLink.textContent = "Visitar site oficial →";
+      } else {
+        lbLink.hidden = true;
+        lbLink.removeAttribute("href");
+      }
+    }
     lbGallery.innerHTML = "";
     project.media.forEach((src, i) => {
       const img = document.createElement("img");
@@ -322,6 +348,12 @@
       video.controls = true;
       video.playsInline = true;
       lbGallery.appendChild(video);
+    }
+    if (project.url) {
+      const end = document.createElement("div");
+      end.className = "lb-end";
+      end.innerHTML = `<p>Projeto no ar</p><a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.url.replace(/^https?:\/\//, "")}</a>`;
+      lbGallery.appendChild(end);
     }
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";

@@ -780,7 +780,43 @@ body.is-touch a { cursor: pointer; }
   font-weight: 400;
   letter-spacing: -0.03em;
 }
-.lightbox-header p:last-child { margin: 0; color: var(--ink-dim); }
+.lightbox-header p:not(.mono) { margin: 0; color: var(--ink-dim); }
+.lb-link {
+  display: inline-flex;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+.lb-link[hidden] { display: none !important; }
+.lb-end {
+  margin-top: 0.5rem;
+  padding: 1.5rem 1.25rem;
+  border: 1px solid var(--line);
+  background: #121210;
+  text-align: center;
+}
+.lb-end p {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.lb-end a {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  text-decoration: none;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.lb-end a:hover { color: #fff6df; }
 .lightbox-gallery { display: grid; gap: 0.75rem; clear: both; }
 .lightbox-gallery img,
 .lightbox-gallery video { width: 100%; background: #0a0a09; }
