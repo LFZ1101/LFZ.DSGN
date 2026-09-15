@@ -843,8 +843,11 @@ body.drawer-open .section-chip {
   }
   .list-wrap,
   .panel-stage {
-    padding-bottom: 8.5rem;
+    padding-bottom: 10.5rem;
     -webkit-overflow-scrolling: touch;
+  }
+  .list-row {
+    scroll-margin-bottom: 7.5rem;
   }
   .panel-stage { overflow: auto; }
   body.is-panel-scroll .section-chip { display: none; }
