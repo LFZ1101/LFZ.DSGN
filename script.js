@@ -110,8 +110,25 @@
     link.addEventListener("click", closeNav);
   });
 
-  // Reveal works on scroll
-  const works = document.querySelectorAll(".work");
+  // Filters
+  const filterButtons = document.querySelectorAll(".work-filters button");
+  const cases = document.querySelectorAll(".case");
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+      filterButtons.forEach((b) => {
+        b.classList.toggle("is-active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      cases.forEach((item) => {
+        const match = filter === "all" || item.dataset.category === filter;
+        item.classList.toggle("is-hidden", !match);
+      });
+    });
+  });
+
+  // Reveal cases on scroll
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
@@ -122,14 +139,14 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
-    works.forEach((el, i) => {
-      el.style.transitionDelay = `${Math.min(i * 80, 320)}ms`;
+    cases.forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min(i * 70, 280)}ms`;
       io.observe(el);
     });
   } else {
-    works.forEach((el) => el.classList.add("is-visible"));
+    cases.forEach((el) => el.classList.add("is-visible"));
   }
 
   // Lightbox
@@ -178,10 +195,8 @@
     lastFocus?.focus?.();
   };
 
-  document.querySelectorAll("[data-project]").forEach((el) => {
-    if (el.tagName === "BUTTON" || el.classList.contains("work-trigger")) {
-      el.addEventListener("click", () => openProject(el.dataset.project));
-    }
+  document.querySelectorAll(".case-trigger").forEach((el) => {
+    el.addEventListener("click", () => openProject(el.dataset.project));
   });
 
   lightbox?.querySelectorAll("[data-close]").forEach((el) => {
@@ -195,7 +210,6 @@
     }
   });
 
-  // Compact header shadow on scroll
   const onScroll = () => {
     if (!header) return;
     header.style.boxShadow = window.scrollY > 8 ? "0 1px 0 var(--line)" : "none";
