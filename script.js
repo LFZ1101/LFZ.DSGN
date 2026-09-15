@@ -165,12 +165,127 @@
   const coarse = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
   if (coarse) document.body.classList.add("is-touch");
 
-  // Loader
+  // Intro / loader (Bergh-inspired)
   const loader = document.getElementById("loader");
-  window.addEventListener("load", () => {
-    setTimeout(() => loader?.classList.add("is-done"), 900);
-  });
-  setTimeout(() => loader?.classList.add("is-done"), 1800);
+  const loaderNum = document.getElementById("loader-num");
+  const loaderProgress = document.getElementById("loader-progress");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const buildRulers = () => {
+    document.querySelectorAll(".loader-ruler").forEach((ruler) => {
+      ruler.innerHTML = "";
+      for (let i = 0; i < 18; i += 1) {
+        const tick = document.createElement("span");
+        tick.style.top = `${(i / 17) * 100}%`;
+        if (i % 3 === 0) tick.dataset.n = String(i).padStart(2, "0");
+        ruler.appendChild(tick);
+      }
+    });
+  };
+
+  const buildThumbs = () => {
+    const host = document.getElementById("loader-thumbs");
+    if (!host) return;
+    const imgs = [
+      "images/portfolio/branding/syelle/syelle-logo-principal.webp",
+      "images/portfolio/branding/viane/cover.webp",
+      "images/portfolio/social/rose-pasteis/cover.webp",
+      "images/portfolio/web/dunamis/cover.webp",
+    ];
+    host.innerHTML = imgs
+      .map((src) => `<div class="loader-thumb"><img src="${src}" alt=""></div>`)
+      .join("");
+  };
+
+  const finishIntro = () => {
+    document.body.classList.remove("is-loading");
+    loader?.classList.add("is-done");
+    if (loader) {
+      loader.style.visibility = "hidden";
+      loader.setAttribute("aria-hidden", "true");
+    }
+  };
+
+  const runIntro = () => {
+    buildRulers();
+    buildThumbs();
+
+    if (!loader || reduceMotion || typeof gsap === "undefined") {
+      if (loaderNum) loaderNum.textContent = "100";
+      finishIntro();
+      gsap.set([".topbar", ".chrome", ".section-chip", ".stage.is-active", ".frame", ".slide-caption", ".stage-bg", ".title-layer"], {
+        clearProps: "all",
+      });
+      return;
+    }
+
+    const state = { value: 0 };
+    const thumbs = gsap.utils.toArray(".loader-thumb");
+
+    gsap.set([".topbar", ".chrome", ".section-chip", ".frame", ".slide-caption", ".stage-bg", ".title-layer"], {
+      opacity: 0,
+    });
+    gsap.set(".frame", { scale: 0.92, y: 18 });
+    gsap.set(".topbar", { y: -18 });
+    gsap.set(".chrome", { y: 18 });
+    gsap.set(".section-chip", { y: -10 });
+    gsap.set(".title-layer", { opacity: 0 });
+    gsap.set(".loader-brand", { opacity: 0, y: 10 });
+    gsap.set(".loader-meta", { opacity: 0, y: 8 });
+    gsap.set(".loader-count", { opacity: 0, y: 24, scale: 0.96 });
+    gsap.set(thumbs, { opacity: 0, scale: 0.92 });
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      onComplete: finishIntro,
+    });
+
+    tl.to(".loader-count", { opacity: 1, y: 0, scale: 1, duration: 0.7 }, 0)
+      .to(".loader-meta", { opacity: 0.55, y: 0, duration: 0.55 }, 0.15)
+      .to(
+        state,
+        {
+          value: 100,
+          duration: 1.55,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            const n = Math.round(state.value);
+            if (loaderNum) loaderNum.textContent = String(n);
+            if (loaderProgress) loaderProgress.style.width = `${n}%`;
+          },
+        },
+        0.1
+      )
+      .to(
+        thumbs,
+        {
+          opacity: 0.55,
+          scale: 1,
+          duration: 0.7,
+          stagger: { each: 0.12, from: "random" },
+        },
+        0.25
+      )
+      .to(".loader-brand", { opacity: 1, y: 0, duration: 0.55 }, 1.05)
+      .to(thumbs, { opacity: 0, duration: 0.35, stagger: 0.05 }, 1.55)
+      .to([".loader-count", ".loader-meta", ".loader-line"], { opacity: 0, y: -18, duration: 0.45 }, 1.7)
+      .to(".loader-brand", { scale: 1.04, duration: 0.35 }, 1.75)
+      .to(".loader", { opacity: 0, duration: 0.7, ease: "power2.inOut" }, 2.05)
+      .to(".stage-bg", { opacity: 1, duration: 0.9 }, 2.15)
+      .to(".title-layer", { opacity: 1, duration: 0.8 }, 2.25)
+      .to(".frame", { opacity: 1, scale: 1, y: 0, duration: 1.05 }, 2.2)
+      .to(".slide-caption", { opacity: 1, duration: 0.55 }, 2.45)
+      .to(".topbar", { opacity: 1, y: 0, duration: 0.7 }, 2.35)
+      .to(".section-chip", { opacity: 1, y: 0, duration: 0.55 }, 2.45)
+      .to(".chrome", { opacity: 1, y: 0, duration: 0.7 }, 2.5);
+  };
+
+  if (document.readyState === "complete") runIntro();
+  else window.addEventListener("load", runIntro);
+  // Fallback if load hangs
+  setTimeout(() => {
+    if (document.body.classList.contains("is-loading")) runIntro();
+  }, 4000);
 
   // Swiper
   const bgImage = document.getElementById("bg-image");
@@ -396,9 +511,4 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeLightbox();
   });
-
-  // Entrance
-  gsap.from(".topbar", { y: -16, opacity: 0, duration: 0.8, delay: 0.95, ease: "power3.out" });
-  gsap.from(".chrome", { y: 16, opacity: 0, duration: 0.8, delay: 1.05, ease: "power3.out" });
-  gsap.from(".frame", { scale: 0.92, opacity: 0, duration: 1, delay: 1, ease: "power3.out" });
 })();
