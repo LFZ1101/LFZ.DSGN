@@ -7,8 +7,8 @@
   --ink-faint: rgba(244, 240, 230, 0.32);
   --line: rgba(244, 240, 230, 0.16);
   --accent: #ffeec8;
-  --frame-w: min(52vw, 620px);
-  --frame-h: min(62vh, 520px);
+  --frame-w: min(58vw, 720px);
+  --frame-h: min(52vh, 465px);
   --font-display: "Instrument Serif", Georgia, serif;
   --font-ui: "Schibsted Grotesk", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -850,8 +850,8 @@ body:has(.lightbox:not([hidden])) .cursor {
     opacity: 0.22;
   }
   :root {
-    --frame-w: min(86vw, 420px);
-    --frame-h: min(48vh, 380px);
+    --frame-w: min(90vw, 420px);
+    --frame-h: min(42vh, 270px);
   }
   .panel-grid { grid-template-columns: 1fr; }
   .about-shot { max-width: 360px; }
