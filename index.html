@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="styles.css?v=bergh-craft-4">
+  <link rel="stylesheet" href="styles.css?v=bergh-craft-5">
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
@@ -30,7 +30,16 @@
       <button type="button" class="nav-item" data-view="contact"><span>04</span>Contato</button>
     </nav>
     <a class="top-cta" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20sobre%20um%20projeto%20de%20design." target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Abrir menu">Menu</button>
   </header>
+
+  <nav class="mobile-drawer" id="mobile-drawer" hidden aria-label="Menu mobile">
+    <button type="button" data-view="slider"><span>01</span>Projetos</button>
+    <button type="button" data-view="services"><span>02</span>Serviços</button>
+    <button type="button" data-view="about"><span>03</span>Sobre</button>
+    <button type="button" data-view="contact"><span>04</span>Contato</button>
+    <a href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20sobre%20um%20projeto%20de%20design." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  </nav>
 
   <p class="section-chip" id="section-chip" aria-live="polite">
     <span class="section-chip-num">01</span>
@@ -306,6 +315,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="script.js?v=bergh-craft-4" defer></script>
+  <script src="script.js?v=bergh-craft-5" defer></script>
 </body>
 </html>
