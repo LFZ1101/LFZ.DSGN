@@ -68,9 +68,9 @@
       title: "Audi RS7",
       description: "Conceito de página principal para lançamento do modelo.",
       media: [
+        "images/portfolio/web/landing-pages/2.webp",
         "images/portfolio/web/landing-pages/CAPA.webp",
         "images/portfolio/web/landing-pages/1.webp",
-        "images/portfolio/web/landing-pages/2.webp",
         "images/portfolio/web/landing-pages/3.webp",
         "images/portfolio/web/landing-pages/4.webp",
         "images/portfolio/web/landing-pages/6.webp",
@@ -90,9 +90,12 @@
     if (toggle) toggle.setAttribute("aria-expanded", "false");
   };
 
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const open = document.body.classList.toggle("nav-open");
+  if (toggle && nav) {
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const open = !document.body.classList.contains("nav-open");
+      document.body.classList.toggle("nav-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
