@@ -324,10 +324,11 @@
     el.style.transform = "";
     el.style.fontSize = "";
 
-    const frameW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--frame-w")) || window.innerWidth * 0.45;
+    const frameEl = document.querySelector(".swiper-slide-active .frame") || document.querySelector(".frame");
+    const frameW = frameEl ? frameEl.getBoundingClientRect().width : window.innerWidth * 0.45;
     const maxW = mobile
-      ? Math.min(window.innerWidth * 0.9, 520)
-      : Math.max(120, (window.innerWidth - frameW) / 2 - 28);
+      ? Math.min(window.innerWidth * 0.86, 480)
+      : Math.max(120, (window.innerWidth - frameW) / 2 - 56);
 
     const natural = el.scrollWidth || el.offsetWidth;
     if (!natural || natural <= maxW) {
