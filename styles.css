@@ -831,9 +831,9 @@ body.drawer-open .section-chip {
   .topbar {
     grid-template-columns: 1fr auto;
     z-index: 95;
-    background: linear-gradient(180deg, rgba(18, 18, 16, 0.96) 55%, transparent);
+    background: #121210;
   }
-  .title-left { display: none; }
+  .title-left { display: none !important; }
   .section-chip-hint { display: none; }
   .frame-ruler { display: none; }
   .chrome {
