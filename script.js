@@ -193,7 +193,7 @@
       "images/portfolio/web/dunamis/cover.webp",
     ];
     host.innerHTML = imgs
-      .map((src) => `<div class="loader-thumb"><img src="${src}" alt=""></div>`)
+      .map((src) => `<div class="loader-thumb"><img src="${src}" alt="" loading="eager"></div>`)
       .join("");
   };
 
@@ -201,9 +201,14 @@
     document.body.classList.remove("is-loading");
     loader?.classList.add("is-done");
     if (loader) {
+      gsap.set(loader, { clearProps: "opacity" });
       loader.style.visibility = "hidden";
       loader.setAttribute("aria-hidden", "true");
     }
+    // Ensure mobile UI is interactive after reveal
+    gsap.set([".topbar", ".chrome", ".section-chip", ".stage.is-active", ".frame", ".slide-caption", ".stage-bg"], {
+      clearProps: "opacity,transform,pointerEvents",
+    });
   };
 
   const runIntro = () => {
@@ -213,40 +218,43 @@
     if (!loader || reduceMotion || typeof gsap === "undefined") {
       if (loaderNum) loaderNum.textContent = "100";
       finishIntro();
-      gsap.set([".topbar", ".chrome", ".section-chip", ".stage.is-active", ".frame", ".slide-caption", ".stage-bg", ".title-layer"], {
-        clearProps: "all",
-      });
       return;
     }
 
     const state = { value: 0 };
-    const thumbs = gsap.utils.toArray(".loader-thumb");
+    const isMobile = window.matchMedia("(max-width: 900px)").matches;
+    const thumbs = gsap.utils.toArray(".loader-thumb").filter((el) => getComputedStyle(el).display !== "none");
 
-    gsap.set([".topbar", ".chrome", ".section-chip", ".frame", ".slide-caption", ".stage-bg", ".title-layer"], {
+    gsap.set([".topbar", ".chrome", ".section-chip", ".frame", ".slide-caption", ".stage-bg"], {
       opacity: 0,
     });
-    gsap.set(".frame", { scale: 0.92, y: 18 });
-    gsap.set(".topbar", { y: -18 });
-    gsap.set(".chrome", { y: 18 });
-    gsap.set(".section-chip", { y: -10 });
-    gsap.set(".title-layer", { opacity: 0 });
+    gsap.set(".frame", { scale: 0.94, y: isMobile ? 14 : 18 });
+    gsap.set(".topbar", { y: isMobile ? -12 : -18 });
+    gsap.set(".chrome", { y: isMobile ? 12 : 18 });
+    gsap.set(".section-chip", { y: -8 });
+    if (!isMobile) gsap.set(".title-layer", { opacity: 0 });
     gsap.set(".loader-brand", { opacity: 0, y: 10 });
     gsap.set(".loader-meta", { opacity: 0, y: 8 });
-    gsap.set(".loader-count", { opacity: 0, y: 24, scale: 0.96 });
-    gsap.set(thumbs, { opacity: 0, scale: 0.92 });
+    gsap.set(".loader-count", { opacity: 0, y: 20, scale: 0.96 });
+    gsap.set(".loader-ruler", { opacity: 0 });
+    if (thumbs.length) gsap.set(thumbs, { opacity: 0, scale: 0.92, y: 10 });
 
     const tl = gsap.timeline({
       defaults: { ease: "power3.out" },
       onComplete: finishIntro,
     });
 
-    tl.to(".loader-count", { opacity: 1, y: 0, scale: 1, duration: 0.7 }, 0)
-      .to(".loader-meta", { opacity: 0.55, y: 0, duration: 0.55 }, 0.15)
+    const countDur = isMobile ? 1.35 : 1.55;
+    const thumbOpacity = isMobile ? 0.62 : 0.55;
+
+    tl.to(".loader-count", { opacity: 1, y: 0, scale: 1, duration: 0.65 }, 0)
+      .to(".loader-meta", { opacity: 0.55, y: 0, duration: 0.5 }, 0.12)
+      .to(".loader-ruler", { opacity: isMobile ? 0.4 : 0.35, duration: 0.6 }, 0.05)
       .to(
         state,
         {
           value: 100,
-          duration: 1.55,
+          duration: countDur,
           ease: "power2.inOut",
           onUpdate: () => {
             const n = Math.round(state.value);
@@ -254,30 +262,43 @@
             if (loaderProgress) loaderProgress.style.width = `${n}%`;
           },
         },
-        0.1
-      )
-      .to(
+        0.08
+      );
+
+    if (thumbs.length) {
+      tl.to(
         thumbs,
         {
-          opacity: 0.55,
+          opacity: thumbOpacity,
           scale: 1,
-          duration: 0.7,
-          stagger: { each: 0.12, from: "random" },
+          y: 0,
+          duration: 0.65,
+          stagger: { each: isMobile ? 0.14 : 0.12, from: "random" },
         },
-        0.25
-      )
-      .to(".loader-brand", { opacity: 1, y: 0, duration: 0.55 }, 1.05)
-      .to(thumbs, { opacity: 0, duration: 0.35, stagger: 0.05 }, 1.55)
-      .to([".loader-count", ".loader-meta", ".loader-line"], { opacity: 0, y: -18, duration: 0.45 }, 1.7)
-      .to(".loader-brand", { scale: 1.04, duration: 0.35 }, 1.75)
-      .to(".loader", { opacity: 0, duration: 0.7, ease: "power2.inOut" }, 2.05)
-      .to(".stage-bg", { opacity: 1, duration: 0.9 }, 2.15)
-      .to(".title-layer", { opacity: 1, duration: 0.8 }, 2.25)
-      .to(".frame", { opacity: 1, scale: 1, y: 0, duration: 1.05 }, 2.2)
-      .to(".slide-caption", { opacity: 1, duration: 0.55 }, 2.45)
-      .to(".topbar", { opacity: 1, y: 0, duration: 0.7 }, 2.35)
-      .to(".section-chip", { opacity: 1, y: 0, duration: 0.55 }, 2.45)
-      .to(".chrome", { opacity: 1, y: 0, duration: 0.7 }, 2.5);
+        0.22
+      );
+    }
+
+    tl.to(".loader-brand", { opacity: 1, y: 0, duration: 0.5 }, isMobile ? 0.95 : 1.05);
+
+    if (thumbs.length) {
+      tl.to(thumbs, { opacity: 0, y: -8, duration: 0.32, stagger: 0.04 }, isMobile ? 1.4 : 1.55);
+    }
+
+    tl.to([".loader-count", ".loader-meta", ".loader-line", ".loader-ruler"], { opacity: 0, y: -14, duration: 0.4 }, isMobile ? 1.5 : 1.7)
+      .to(".loader-brand", { scale: 1.03, duration: 0.3 }, isMobile ? 1.55 : 1.75)
+      .to(".loader", { opacity: 0, duration: 0.65, ease: "power2.inOut" }, isMobile ? 1.85 : 2.05)
+      .to(".stage-bg", { opacity: 1, duration: 0.85 }, isMobile ? 1.95 : 2.15);
+
+    if (!isMobile) {
+      tl.to(".title-layer", { opacity: 1, duration: 0.8 }, 2.25);
+    }
+
+    tl.to(".frame", { opacity: 1, scale: 1, y: 0, duration: isMobile ? 0.9 : 1.05 }, isMobile ? 2.0 : 2.2)
+      .to(".slide-caption", { opacity: 1, duration: 0.5 }, isMobile ? 2.2 : 2.45)
+      .to(".topbar", { opacity: 1, y: 0, duration: 0.65 }, isMobile ? 2.1 : 2.35)
+      .to(".section-chip", { opacity: 1, y: 0, duration: 0.5 }, isMobile ? 2.2 : 2.45)
+      .to(".chrome", { opacity: 1, y: 0, duration: 0.65 }, isMobile ? 2.25 : 2.5);
   };
 
   let introStarted = false;

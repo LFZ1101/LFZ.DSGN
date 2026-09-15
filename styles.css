@@ -171,8 +171,44 @@ body.is-loading .stage {
 .loader-thumb:nth-child(4) { bottom: 12%; right: 8%; }
 
 @media (max-width: 900px) {
-  .loader-thumbs { display: none; }
-  .loader-ruler { opacity: 0.22; width: 18px; }
+  .loader-count {
+    font-size: clamp(4.8rem, 28vw, 7.5rem);
+  }
+  .loader-brand {
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  }
+  .loader-meta {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+  .loader-line {
+    width: min(120px, 36vw);
+  }
+  .loader-ruler {
+    opacity: 0.4;
+    width: 16px;
+  }
+  .loader-ruler[data-side="left"] { left: 0.55rem; }
+  .loader-ruler[data-side="right"] { right: 0.55rem; }
+  .loader-ruler span::after { font-size: 7px; }
+
+  .loader-thumbs { display: block; }
+  .loader-thumb {
+    width: min(78px, 22vw);
+    opacity: 0;
+  }
+  .loader-thumb:nth-child(1) { top: 9%; left: 7%; }
+  .loader-thumb:nth-child(2) { top: 11%; right: 7%; left: auto; }
+  .loader-thumb:nth-child(3) { bottom: 11%; left: 8%; top: auto; }
+  .loader-thumb:nth-child(4) { bottom: 9%; right: 7%; left: auto; top: auto; }
+}
+
+@media (max-width: 640px) {
+  .loader-center { gap: 0.7rem; padding: 0 2.5rem; }
+  .loader-thumb:nth-child(2),
+  .loader-thumb:nth-child(3) { display: none; }
+  .loader-thumb:nth-child(1) { top: 10%; left: 6%; }
+  .loader-thumb:nth-child(4) { bottom: 10%; right: 6%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
