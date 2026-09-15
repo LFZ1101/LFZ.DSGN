@@ -4,202 +4,167 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>LFZ.DSGN — Designer Gráfico</title>
-  <meta name="description" content="Luís Felipe — designer gráfico. Identidade visual, branding e manipulação digital desde 2017.">
-  <meta name="theme-color" content="#141412">
+  <meta name="description" content="Luís Felipe — identidade visual, social media, landing pages e design gráfico.">
+  <meta name="theme-color" content="#121210">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=bergh-level-1">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css?v=bergh-craft-3">
 </head>
 <body>
-  <a class="skip-link" href="#work">Ir para os trabalhos</a>
-
-  <header class="nav">
-    <a class="nav-logo" href="#top">LFZ.DSGN</a>
-    <nav class="nav-links" aria-label="Principal">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="nav-cta" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Disponível</a>
-    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu">
-      Menu
-    </button>
-  </header>
-
-  <div class="drawer" id="drawer" hidden>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <a href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  <div class="loader" id="loader" aria-hidden="true">
+    <p class="loader-brand">LFZ.DSGN</p>
+    <p class="loader-bar"><span></span></p>
   </div>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="panel hero" data-panel="hero">
-      <div class="panel-media" aria-hidden="true">
-        <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="" class="panel-image" fetchpriority="high">
-        <div class="panel-veil"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span>• Ver projeto</span></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" data-view="slider">LFZ.DSGN</a>
+    <nav class="topnav" aria-label="Principal">
+      <button type="button" class="nav-item is-active" data-view="slider"><i></i>Work</button>
+      <button type="button" class="nav-item" data-view="about"><i></i>About</button>
+      <button type="button" class="nav-item" data-view="contact"><i></i>Contact</button>
+    </nav>
+    <a class="top-cta" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20sobre%20um%20projeto%20de%20design." target="_blank" rel="noopener noreferrer">Disponível</a>
+  </header>
+
+  <!-- SLIDER VIEW -->
+  <div class="stage is-active" id="view-slider" data-stage="slider">
+    <div class="stage-bg" id="stage-bg" aria-hidden="true">
+      <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="" id="bg-image">
+    </div>
+
+    <div class="title-layer" aria-hidden="true">
+      <span class="title-left" id="title-left">Syelle</span>
+      <span class="title-right" id="title-right">Joias</span>
+    </div>
+
+    <div class="swiper work-swiper" id="work-swiper">
+      <div class="swiper-wrapper">
+        <!-- slides injected / static -->
+        <div class="swiper-slide" data-id="syelle" data-cat="identidade" data-title="Syelle" data-side="Joias" data-label="Identidade visual" data-year="2025">
+          <button type="button" class="frame open-project" data-project="syelle">
+            <span class="frame-mark tl"></span><span class="frame-mark tr"></span>
+            <span class="frame-mark bl"></span><span class="frame-mark br"></span>
+            <span class="frame-ruler left" aria-hidden="true"></span>
+            <span class="frame-ruler right" aria-hidden="true"></span>
+            <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="Syelle — identidade visual">
+            <span class="frame-tag">Identidade visual</span>
+          </button>
+          <p class="slide-caption"><span>01</span> Syelle · Brand system</p>
+        </div>
+
+        <div class="swiper-slide" data-id="cheetos" data-cat="digital" data-title="Cheetos" data-side="Sweetos" data-label="Manipulação digital" data-year="Campanha">
+          <button type="button" class="frame open-project" data-project="cheetos">
+            <span class="frame-mark tl"></span><span class="frame-mark tr"></span>
+            <span class="frame-mark bl"></span><span class="frame-mark br"></span>
+            <span class="frame-ruler left" aria-hidden="true"></span>
+            <span class="frame-ruler right" aria-hidden="true"></span>
+            <img src="images/portfolio/branding/cheetos/2.webp" alt="Cheetos Sweetos">
+            <span class="frame-tag">Manipulação digital</span>
+          </button>
+          <p class="slide-caption"><span>02</span> Cheetos Sweetos · Digital art</p>
+        </div>
+
+        <div class="swiper-slide" data-id="valhalla" data-cat="digital" data-title="Valhalla" data-side="Eivor" data-label="Manipulação digital" data-year="Série">
+          <button type="button" class="frame open-project" data-project="valhalla">
+            <span class="frame-mark tl"></span><span class="frame-mark tr"></span>
+            <span class="frame-mark bl"></span><span class="frame-mark br"></span>
+            <span class="frame-ruler left" aria-hidden="true"></span>
+            <span class="frame-ruler right" aria-hidden="true"></span>
+            <img src="images/portfolio/digital/assassins-creed-valhalla/1.webp" alt="Valhalla Eivor">
+            <span class="frame-tag">Manipulação digital</span>
+          </button>
+          <p class="slide-caption"><span>03</span> Valhalla · Key art</p>
+        </div>
+
+        <div class="swiper-slide" data-id="granvita" data-cat="print" data-title="Granvita" data-side="Agro" data-label="Material publicitário" data-year="Print">
+          <button type="button" class="frame open-project" data-project="granvita">
+            <span class="frame-mark tl"></span><span class="frame-mark tr"></span>
+            <span class="frame-mark bl"></span><span class="frame-mark br"></span>
+            <span class="frame-ruler left" aria-hidden="true"></span>
+            <span class="frame-ruler right" aria-hidden="true"></span>
+            <img src="images/portfolio/print/vulcano-material-publicitario/4.webp" alt="Granvita">
+            <span class="frame-tag">Material publicitário</span>
+          </button>
+          <p class="slide-caption"><span>04</span> Granvita · Outdoor &amp; print</p>
+        </div>
+
+        <div class="swiper-slide" data-id="trots" data-cat="social" data-title="Trot's" data-side="Campanha" data-label="Social media" data-year="Posts">
+          <button type="button" class="frame open-project" data-project="trots">
+            <span class="frame-mark tl"></span><span class="frame-mark tr"></span>
+            <span class="frame-mark bl"></span><span class="frame-mark br"></span>
+            <span class="frame-ruler left" aria-hidden="true"></span>
+            <span class="frame-ruler right" aria-hidden="true"></span>
+            <img src="images/portfolio/social/campanhas/1.webp" alt="Trot's social">
+            <span class="frame-tag">Social media</span>
+          </button>
+          <p class="slide-caption"><span>05</span> Trot's · Social campaign</p>
+        </div>
+
+        <div class="swiper-slide" data-id="audi" data-cat="web" data-title="Audi" data-side="RS7" data-label="Landing page" data-year="Web">
+          <button type="button" class="frame open-project" data-project="audi">
+            <span class="frame-mark tl"></span><span class="frame-mark tr"></span>
+            <span class="frame-mark bl"></span><span class="frame-mark br"></span>
+            <span class="frame-ruler left" aria-hidden="true"></span>
+            <span class="frame-ruler right" aria-hidden="true"></span>
+            <img src="images/portfolio/web/landing-pages/2.webp" alt="Audi RS7 landing">
+            <span class="frame-tag">Landing page</span>
+          </button>
+          <p class="slide-caption"><span>06</span> Audi RS7 · Web concept</p>
+        </div>
       </div>
-      <div class="hero-inner">
-        <p class="hero-role">Designer gráfico · Identidade &amp; branding</p>
-        <h1 class="hero-name">LFZ.DSGN</h1>
-        <p class="hero-line">Direção visual para marcas com presença.</p>
-        <div class="hero-foot">
-          <a class="text-link" href="#work">Selecionados</a>
-          <span class="hero-count" id="progress-label">01 / 06</span>
-        </div>
+    </div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div class="stage" id="view-list" data-stage="list" hidden>
+    <div class="list-wrap">
+      <div class="list-head">
+        <p class="mono">Index</p>
+        <h2>Selecionados</h2>
       </div>
-    </section>
-
-    <!-- WORK PANELS -->
-    <section id="work" class="work-stack" aria-label="Trabalhos selecionados">
-      <article class="panel project" data-panel="01" data-project="syelle">
-        <div class="panel-media" aria-hidden="true">
-          <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="" class="panel-image" loading="lazy">
-          <div class="panel-veil"></div>
-        </div>
-        <div class="project-frame">
-          <div class="project-meta">
-            <span>01</span>
-            <span>Identidade visual</span>
-            <span>2025</span>
-          </div>
-          <h2 class="project-title">Syelle</h2>
-          <p class="project-desc">Sistema de marca para joalheria contemporânea — logo, paleta, manual e aplicações.</p>
-          <button type="button" class="text-link open-project" data-project="syelle">Abrir projeto</button>
-        </div>
-      </article>
-
-      <article class="panel project" data-panel="02" data-project="cheetos">
-        <div class="panel-media" aria-hidden="true">
-          <img src="images/portfolio/branding/cheetos/2.webp" alt="" class="panel-image" loading="lazy">
-          <div class="panel-veil"></div>
-        </div>
-        <div class="project-frame">
-          <div class="project-meta">
-            <span>02</span>
-            <span>Manipulação digital</span>
-            <span>Campanha</span>
-          </div>
-          <h2 class="project-title">Cheetos Sweetos</h2>
-          <p class="project-desc">Composição criativa com narrativa visual e transformação antes/depois.</p>
-          <button type="button" class="text-link open-project" data-project="cheetos">Abrir projeto</button>
-        </div>
-      </article>
-
-      <article class="panel project" data-panel="03" data-project="valhalla">
-        <div class="panel-media" aria-hidden="true">
-          <img src="images/portfolio/digital/assassins-creed-valhalla/1.webp" alt="" class="panel-image" loading="lazy">
-          <div class="panel-veil"></div>
-        </div>
-        <div class="project-frame">
-          <div class="project-meta">
-            <span>03</span>
-            <span>Manipulação digital</span>
-            <span>Série</span>
-          </div>
-          <h2 class="project-title">Valhalla</h2>
-          <p class="project-desc">Série cinematográfica com composição, clima épico e tratamento de imagem.</p>
-          <button type="button" class="text-link open-project" data-project="valhalla">Abrir projeto</button>
-        </div>
-      </article>
-
-      <article class="panel project" data-panel="04" data-project="granvita">
-        <div class="panel-media" aria-hidden="true">
-          <img src="images/portfolio/print/vulcano-material-publicitario/4.webp" alt="" class="panel-image" loading="lazy">
-          <div class="panel-veil"></div>
-        </div>
-        <div class="project-frame">
-          <div class="project-meta">
-            <span>04</span>
-            <span>Material publicitário</span>
-            <span>Print</span>
-          </div>
-          <h2 class="project-title">Granvita</h2>
-          <p class="project-desc">Outdoor e impressos com linguagem forte para o agronegócio.</p>
-          <button type="button" class="text-link open-project" data-project="granvita">Abrir projeto</button>
-        </div>
-      </article>
-
-      <article class="panel project" data-panel="05" data-project="trots">
-        <div class="panel-media" aria-hidden="true">
-          <img src="images/portfolio/social/campanhas/1.webp" alt="" class="panel-image" loading="lazy">
-          <div class="panel-veil"></div>
-        </div>
-        <div class="project-frame">
-          <div class="project-meta">
-            <span>05</span>
-            <span>Social media</span>
-            <span>Campanha</span>
-          </div>
-          <h2 class="project-title">Trot's</h2>
-          <p class="project-desc">Campanha para redes com mensagem direta e identidade memorável.</p>
-          <button type="button" class="text-link open-project" data-project="trots">Abrir projeto</button>
-        </div>
-      </article>
-
-      <article class="panel project" data-panel="06" data-project="audi">
-        <div class="panel-media" aria-hidden="true">
-          <img src="images/portfolio/web/landing-pages/2.webp" alt="" class="panel-image" loading="lazy">
-          <div class="panel-veil"></div>
-        </div>
-        <div class="project-frame">
-          <div class="project-meta">
-            <span>06</span>
-            <span>Web design</span>
-            <span>Conceito</span>
-          </div>
-          <h2 class="project-title">Audi RS7</h2>
-          <p class="project-desc">Página principal de lançamento com foco em presença e impacto.</p>
-          <button type="button" class="text-link open-project" data-project="audi">Abrir projeto</button>
-        </div>
-      </article>
-    </section>
-
-    <!-- INDEX -->
-    <section class="index-section" aria-label="Índice de projetos">
-      <div class="index-head">
-        <p class="eyebrow">Index</p>
-        <h2>Todos os selecionados</h2>
-      </div>
-      <ul class="index-list">
-        <li><button type="button" class="index-row open-project" data-project="syelle"><span>01</span><span>Syelle</span><span>Identidade</span></button></li>
-        <li><button type="button" class="index-row open-project" data-project="cheetos"><span>02</span><span>Cheetos Sweetos</span><span>Digital</span></button></li>
-        <li><button type="button" class="index-row open-project" data-project="valhalla"><span>03</span><span>Valhalla</span><span>Digital</span></button></li>
-        <li><button type="button" class="index-row open-project" data-project="granvita"><span>04</span><span>Granvita</span><span>Print</span></button></li>
-        <li><button type="button" class="index-row open-project" data-project="trots"><span>05</span><span>Trot's</span><span>Social</span></button></li>
-        <li><button type="button" class="index-row open-project" data-project="audi"><span>06</span><span>Audi RS7</span><span>Web</span></button></li>
+      <ul class="list-index" id="list-index">
+        <li><button type="button" class="list-row open-project" data-project="syelle" data-cat="identidade"><span>01</span><strong>Syelle</strong><em>Identidade</em></button></li>
+        <li><button type="button" class="list-row open-project" data-project="cheetos" data-cat="digital"><span>02</span><strong>Cheetos Sweetos</strong><em>Digital</em></button></li>
+        <li><button type="button" class="list-row open-project" data-project="valhalla" data-cat="digital"><span>03</span><strong>Valhalla</strong><em>Digital</em></button></li>
+        <li><button type="button" class="list-row open-project" data-project="granvita" data-cat="print"><span>04</span><strong>Granvita</strong><em>Print</em></button></li>
+        <li><button type="button" class="list-row open-project" data-project="trots" data-cat="social"><span>05</span><strong>Trot's</strong><em>Social</em></button></li>
+        <li><button type="button" class="list-row open-project" data-project="audi" data-cat="web"><span>06</span><strong>Audi RS7</strong><em>Landing</em></button></li>
       </ul>
-    </section>
+    </div>
+  </div>
 
-    <!-- ABOUT -->
-    <section class="about" id="about">
-      <div class="about-grid">
-        <div class="about-copy">
-          <p class="eyebrow">About</p>
-          <h2>Luís Felipe</h2>
-          <p class="about-lead">Designer gráfico em Apucarana-PR, desde 2017.</p>
-          <p>Trabalho com identidade visual, branding e manipulação digital. O foco é transformar conceitos em sistemas visuais claros, elegantes e prontos para circular.</p>
-          <dl class="about-facts">
-            <div><dt>Base</dt><dd>Apucarana · Brasil</dd></div>
-            <div><dt>Disciplinas</dt><dd>Brand · Digital · Print · Social · Web</dd></div>
-            <div><dt>Ferramentas</dt><dd>Photoshop · Illustrator · InDesign · Lightroom</dd></div>
-          </dl>
-        </div>
-        <div class="about-photo">
-          <img src="sua-foto.webp" alt="Luís Felipe" width="720" height="900" loading="lazy">
-        </div>
+  <!-- ABOUT -->
+  <div class="stage panel-stage" id="view-about" data-stage="about" hidden>
+    <div class="panel-grid">
+      <div>
+        <p class="mono">About</p>
+        <h2 class="display">Luís Felipe</h2>
+        <p class="lead">Designer gráfico em Apucarana-PR, desde 2017.</p>
+        <p class="body-copy">Especializado em identidade visual, social media, landing pages e manipulação digital. Construo sistemas visuais elegantes, organizados e prontos para circular.</p>
+        <dl class="facts">
+          <div><dt>Base</dt><dd>Apucarana · Brasil</dd></div>
+          <div><dt>Foco</dt><dd>Brand · Social · Landing · Print · Digital</dd></div>
+          <div><dt>Tools</dt><dd>Photoshop · Illustrator · InDesign · Lightroom</dd></div>
+        </dl>
       </div>
-    </section>
+      <div class="about-shot">
+        <img src="sua-foto.webp" alt="Luís Felipe" width="640" height="800">
+      </div>
+    </div>
+  </div>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <p class="eyebrow">Contact</p>
-      <h2>Vamos falar do próximo projeto.</h2>
+  <!-- CONTACT -->
+  <div class="stage panel-stage" id="view-contact" data-stage="contact" hidden>
+    <div class="contact-block">
+      <p class="mono">Contact</p>
+      <h2 class="display">Vamos falar do próximo projeto.</h2>
       <div class="contact-links">
-        <a href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20sobre%20um%20projeto%20de%20design." target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a href="mailto:lfz.dsgn.studio@gmail.com">lfz.dsgn.studio@gmail.com</a>
         <a href="tel:+5543999541462">+55 43 99954-1462</a>
       </div>
@@ -208,26 +173,46 @@
         <a href="https://www.instagram.com/lfz.dsgn/" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="https://www.linkedin.com/in/lfzdsgn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <footer class="footer">
-    <span>LFZ.DSGN</span>
-    <span>© <span id="year"></span></span>
+  <!-- BOTTOM CHROME -->
+  <footer class="chrome">
+    <div class="chrome-left">
+      <div class="mode-toggle" role="tablist" aria-label="Modo de visualização">
+        <button type="button" class="is-active" data-view="slider" role="tab">Slider</button>
+        <button type="button" data-view="list" role="tab">List</button>
+      </div>
+      <span class="mono year">© <span id="year"></span></span>
+    </div>
+    <div class="chrome-right">
+      <div class="filters" role="tablist" aria-label="Filtrar projetos">
+        <button type="button" class="is-active" data-filter="all">All <em id="count-all">(6)</em></button>
+        <button type="button" data-filter="identidade">Identidade</button>
+        <button type="button" data-filter="social">Social</button>
+        <button type="button" data-filter="digital">Digital</button>
+        <button type="button" data-filter="print">Print</button>
+        <button type="button" data-filter="web">Landing</button>
+      </div>
+      <span class="mono counter" id="counter">01 / 06</span>
+    </div>
   </footer>
 
   <div class="lightbox" id="lightbox" hidden>
     <div class="lightbox-backdrop" data-close></div>
-    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
-      <button type="button" class="lightbox-close" data-close aria-label="Fechar">Fechar</button>
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+      <button type="button" class="lightbox-close" data-close>Fechar</button>
       <div class="lightbox-header">
-        <h3 id="lightbox-title"></h3>
-        <p id="lightbox-desc"></p>
+        <p class="mono" id="lb-label"></p>
+        <h3 id="lb-title"></h3>
+        <p id="lb-desc"></p>
       </div>
-      <div class="lightbox-gallery" id="lightbox-gallery"></div>
+      <div class="lightbox-gallery" id="lb-gallery"></div>
     </div>
   </div>
 
-  <script src="script.js?v=bergh-level-1" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="script.js?v=bergh-craft-3" defer></script>
 </body>
 </html>
