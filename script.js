@@ -280,12 +280,16 @@
       .to(".chrome", { opacity: 1, y: 0, duration: 0.7 }, 2.5);
   };
 
-  if (document.readyState === "complete") runIntro();
-  else window.addEventListener("load", runIntro);
-  // Fallback if load hangs
-  setTimeout(() => {
-    if (document.body.classList.contains("is-loading")) runIntro();
-  }, 4000);
+  let introStarted = false;
+  const startIntroOnce = () => {
+    if (introStarted) return;
+    introStarted = true;
+    runIntro();
+  };
+
+  if (document.readyState === "complete") startIntroOnce();
+  else window.addEventListener("load", startIntroOnce);
+  setTimeout(startIntroOnce, 2800);
 
   // Swiper
   const bgImage = document.getElementById("bg-image");
