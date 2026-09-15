@@ -183,9 +183,21 @@
   const stages = {
     slider: document.getElementById("view-slider"),
     list: document.getElementById("view-list"),
+    services: document.getElementById("view-services"),
     about: document.getElementById("view-about"),
     contact: document.getElementById("view-contact"),
   };
+
+  const sectionMeta = {
+    slider: { num: "01", label: "Projetos", hint: "— portfólio selecionado" },
+    list: { num: "01", label: "Projetos", hint: "— lista completa" },
+    services: { num: "02", label: "Serviços", hint: "— o que eu entrego" },
+    about: { num: "03", label: "Sobre", hint: "— quem faz o trabalho" },
+    contact: { num: "04", label: "Contato", hint: "— vamos conversar" },
+  };
+
+  const chip = document.getElementById("section-chip");
+  const chrome = document.getElementById("chrome");
 
   const setView = (name) => {
     Object.entries(stages).forEach(([key, el]) => {
@@ -205,6 +217,15 @@
     document.querySelectorAll(".mode-toggle button").forEach((btn) => {
       btn.classList.toggle("is-active", btn.dataset.view === name);
     });
+
+    const meta = sectionMeta[name] || sectionMeta.slider;
+    if (chip) {
+      chip.querySelector(".section-chip-num").textContent = meta.num;
+      chip.querySelector(".section-chip-label").textContent = meta.label;
+      chip.querySelector(".section-chip-hint").textContent = meta.hint;
+    }
+
+    chrome?.classList.toggle("is-panel-mode", name === "services" || name === "about" || name === "contact");
 
     if (name === "slider") requestAnimationFrame(() => swiper.update());
   };
