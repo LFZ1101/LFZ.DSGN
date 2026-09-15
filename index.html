@@ -3,342 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>LFZ.DSGN — Designer Gráfico | Identidade Visual & Branding</title>
-  <meta name="description" content="Luís Felipe — designer gráfico em Apucarana-PR. Identidade visual, branding, manipulação digital e social media desde 2017.">
-  <meta name="author" content="Luís Felipe — LFZ.DSGN">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lfzdsgn.netlify.app/">
-  <meta property="og:title" content="LFZ.DSGN — Designer Gráfico">
-  <meta property="og:description" content="Identidade visual, branding e design gráfico com direção clara e presença.">
-  <meta property="og:image" content="https://lfzdsgn.netlify.app/sua-foto.webp">
-  <meta name="theme-color" content="#12131a">
+  <title>LFZ.DSGN — Designer Gráfico</title>
+  <meta name="description" content="Luís Felipe — designer gráfico. Identidade visual, branding e manipulação digital desde 2017.">
+  <meta name="theme-color" content="#141412">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=atelier-20260915">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=bergh-level-1">
 </head>
 <body>
-  <a class="skip-link" href="#trabalhos">Ir para os trabalhos</a>
+  <a class="skip-link" href="#work">Ir para os trabalhos</a>
 
-  <header class="site-header" id="top">
-    <div class="header-inner">
-      <a class="brand" href="#top" aria-label="LFZ.DSGN — início">
-        <span class="brand-mark">LFZ</span>
-        <span class="brand-dot">.</span>
-        <span class="brand-rest">DSGN</span>
-      </a>
-      <nav class="nav-desktop" aria-label="Principal">
-        <a href="#trabalhos"><span>01</span>Trabalhos</a>
-        <a href="#servicos"><span>02</span>Serviços</a>
-        <a href="#sobre"><span>03</span>Sobre</a>
-        <a href="#contato"><span>04</span>Contato</a>
-      </nav>
-      <a class="header-cta" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Iniciar projeto</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
-      </button>
-    </div>
+  <header class="nav">
+    <a class="nav-logo" href="#top">LFZ.DSGN</a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Disponível</a>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu">
+      Menu
+    </button>
   </header>
 
-  <nav class="nav-mobile" id="nav-mobile" aria-label="Menu mobile" hidden>
-    <a href="#trabalhos"><span>01</span>Trabalhos</a>
-    <a href="#servicos"><span>02</span>Serviços</a>
-    <a href="#sobre"><span>03</span>Sobre</a>
-    <a href="#contato"><span>04</span>Contato</a>
-    <a class="nav-mobile-cta" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Iniciar projeto</a>
-  </nav>
+  <div class="drawer" id="drawer" hidden>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  </div>
 
-  <main>
-    <section class="hero" aria-label="Apresentação">
-      <div class="hero-media" aria-hidden="true">
-        <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="" class="hero-image" fetchpriority="high">
-        <div class="hero-veil"></div>
-        <div class="hero-grain"></div>
+  <main id="top">
+    <!-- HERO -->
+    <section class="panel hero" data-panel="hero">
+      <div class="panel-media" aria-hidden="true">
+        <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="" class="panel-image" fetchpriority="high">
+        <div class="panel-veil"></div>
       </div>
-      <div class="hero-frame">
-        <div class="hero-meta">
-          <span>Designer gráfico</span>
-          <span class="meta-sep" aria-hidden="true"></span>
-          <span>Apucarana · BR</span>
-          <span class="meta-sep" aria-hidden="true"></span>
-          <span>Desde 2017</span>
+      <div class="hero-inner">
+        <p class="hero-role">Designer gráfico · Identidade &amp; branding</p>
+        <h1 class="hero-name">LFZ.DSGN</h1>
+        <p class="hero-line">Direção visual para marcas com presença.</p>
+        <div class="hero-foot">
+          <a class="text-link" href="#work">Selecionados</a>
+          <span class="hero-count" id="progress-label">01 / 06</span>
         </div>
-        <div class="hero-content">
-          <p class="hero-brand">LFZ.DSGN</p>
-          <h1 class="hero-title">Direção visual elegante para marcas que querem presença.</h1>
-          <p class="hero-lead">Identidade, branding e comunicação com método, estética e clareza.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#trabalhos">Explorar portfólio</a>
-            <a class="btn btn-ghost" href="#contato">Solicitar proposta</a>
+      </div>
+    </section>
+
+    <!-- WORK PANELS -->
+    <section id="work" class="work-stack" aria-label="Trabalhos selecionados">
+      <article class="panel project" data-panel="01" data-project="syelle">
+        <div class="panel-media" aria-hidden="true">
+          <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="" class="panel-image" loading="lazy">
+          <div class="panel-veil"></div>
+        </div>
+        <div class="project-frame">
+          <div class="project-meta">
+            <span>01</span>
+            <span>Identidade visual</span>
+            <span>2025</span>
           </div>
+          <h2 class="project-title">Syelle</h2>
+          <p class="project-desc">Sistema de marca para joalheria contemporânea — logo, paleta, manual e aplicações.</p>
+          <button type="button" class="text-link open-project" data-project="syelle">Abrir projeto</button>
         </div>
-        <div class="hero-aside" aria-hidden="true">
-          <span>Scroll</span>
-          <span class="hero-scroll-line"></span>
+      </article>
+
+      <article class="panel project" data-panel="02" data-project="cheetos">
+        <div class="panel-media" aria-hidden="true">
+          <img src="images/portfolio/branding/cheetos/2.webp" alt="" class="panel-image" loading="lazy">
+          <div class="panel-veil"></div>
         </div>
-      </div>
+        <div class="project-frame">
+          <div class="project-meta">
+            <span>02</span>
+            <span>Manipulação digital</span>
+            <span>Campanha</span>
+          </div>
+          <h2 class="project-title">Cheetos Sweetos</h2>
+          <p class="project-desc">Composição criativa com narrativa visual e transformação antes/depois.</p>
+          <button type="button" class="text-link open-project" data-project="cheetos">Abrir projeto</button>
+        </div>
+      </article>
+
+      <article class="panel project" data-panel="03" data-project="valhalla">
+        <div class="panel-media" aria-hidden="true">
+          <img src="images/portfolio/digital/assassins-creed-valhalla/1.webp" alt="" class="panel-image" loading="lazy">
+          <div class="panel-veil"></div>
+        </div>
+        <div class="project-frame">
+          <div class="project-meta">
+            <span>03</span>
+            <span>Manipulação digital</span>
+            <span>Série</span>
+          </div>
+          <h2 class="project-title">Valhalla</h2>
+          <p class="project-desc">Série cinematográfica com composição, clima épico e tratamento de imagem.</p>
+          <button type="button" class="text-link open-project" data-project="valhalla">Abrir projeto</button>
+        </div>
+      </article>
+
+      <article class="panel project" data-panel="04" data-project="granvita">
+        <div class="panel-media" aria-hidden="true">
+          <img src="images/portfolio/print/vulcano-material-publicitario/4.webp" alt="" class="panel-image" loading="lazy">
+          <div class="panel-veil"></div>
+        </div>
+        <div class="project-frame">
+          <div class="project-meta">
+            <span>04</span>
+            <span>Material publicitário</span>
+            <span>Print</span>
+          </div>
+          <h2 class="project-title">Granvita</h2>
+          <p class="project-desc">Outdoor e impressos com linguagem forte para o agronegócio.</p>
+          <button type="button" class="text-link open-project" data-project="granvita">Abrir projeto</button>
+        </div>
+      </article>
+
+      <article class="panel project" data-panel="05" data-project="trots">
+        <div class="panel-media" aria-hidden="true">
+          <img src="images/portfolio/social/campanhas/1.webp" alt="" class="panel-image" loading="lazy">
+          <div class="panel-veil"></div>
+        </div>
+        <div class="project-frame">
+          <div class="project-meta">
+            <span>05</span>
+            <span>Social media</span>
+            <span>Campanha</span>
+          </div>
+          <h2 class="project-title">Trot's</h2>
+          <p class="project-desc">Campanha para redes com mensagem direta e identidade memorável.</p>
+          <button type="button" class="text-link open-project" data-project="trots">Abrir projeto</button>
+        </div>
+      </article>
+
+      <article class="panel project" data-panel="06" data-project="audi">
+        <div class="panel-media" aria-hidden="true">
+          <img src="images/portfolio/web/landing-pages/2.webp" alt="" class="panel-image" loading="lazy">
+          <div class="panel-veil"></div>
+        </div>
+        <div class="project-frame">
+          <div class="project-meta">
+            <span>06</span>
+            <span>Web design</span>
+            <span>Conceito</span>
+          </div>
+          <h2 class="project-title">Audi RS7</h2>
+          <p class="project-desc">Página principal de lançamento com foco em presença e impacto.</p>
+          <button type="button" class="text-link open-project" data-project="audi">Abrir projeto</button>
+        </div>
+      </article>
     </section>
 
-    <section class="statement" aria-label="Posicionamento">
-      <div class="statement-inner">
-        <p class="statement-index">Studio</p>
-        <p class="statement-text">
-          Cada projeto nasce com intenção: organizar a marca, construir linguagem e entregar peças
-          prontas para circular com consistência.
-        </p>
+    <!-- INDEX -->
+    <section class="index-section" aria-label="Índice de projetos">
+      <div class="index-head">
+        <p class="eyebrow">Index</p>
+        <h2>Todos os selecionados</h2>
       </div>
+      <ul class="index-list">
+        <li><button type="button" class="index-row open-project" data-project="syelle"><span>01</span><span>Syelle</span><span>Identidade</span></button></li>
+        <li><button type="button" class="index-row open-project" data-project="cheetos"><span>02</span><span>Cheetos Sweetos</span><span>Digital</span></button></li>
+        <li><button type="button" class="index-row open-project" data-project="valhalla"><span>03</span><span>Valhalla</span><span>Digital</span></button></li>
+        <li><button type="button" class="index-row open-project" data-project="granvita"><span>04</span><span>Granvita</span><span>Print</span></button></li>
+        <li><button type="button" class="index-row open-project" data-project="trots"><span>05</span><span>Trot's</span><span>Social</span></button></li>
+        <li><button type="button" class="index-row open-project" data-project="audi"><span>06</span><span>Audi RS7</span><span>Web</span></button></li>
+      </ul>
     </section>
 
-    <section class="section works" id="trabalhos" aria-labelledby="trabalhos-title">
-      <div class="section-head">
-        <div>
-          <p class="section-index">01 — Seleção</p>
-          <h2 id="trabalhos-title">Trabalhos</h2>
-        </div>
-        <p class="section-lead">Uma curadoria objetiva dos projetos mais representativos da minha direção visual.</p>
-      </div>
-
-      <div class="work-filters" role="tablist" aria-label="Filtrar por categoria">
-        <button type="button" class="is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
-        <button type="button" data-filter="identidade" role="tab" aria-selected="false">Identidade</button>
-        <button type="button" data-filter="digital" role="tab" aria-selected="false">Digital</button>
-        <button type="button" data-filter="print" role="tab" aria-selected="false">Print</button>
-        <button type="button" data-filter="social" role="tab" aria-selected="false">Social</button>
-        <button type="button" data-filter="web" role="tab" aria-selected="false">Web</button>
-      </div>
-
-      <div class="works-list">
-        <article class="case" data-project="syelle" data-category="identidade">
-          <button type="button" class="case-trigger" data-project="syelle" aria-label="Abrir projeto Syelle">
-            <div class="case-media">
-              <img src="images/portfolio/branding/syelle/syelle-logo-principal.webp" alt="Identidade visual Syelle" loading="lazy">
-            </div>
-            <div class="case-info">
-              <span class="case-num">01</span>
-              <h3>Syelle</h3>
-              <p class="case-cat">Identidade visual</p>
-              <p class="case-summary">Sistema de marca para joalheria contemporânea — logo, paleta, manual e aplicações.</p>
-              <span class="case-link">Ver projeto</span>
-            </div>
-          </button>
-        </article>
-
-        <article class="case" data-project="cheetos" data-category="digital">
-          <button type="button" class="case-trigger" data-project="cheetos" aria-label="Abrir projeto Cheetos Sweetos">
-            <div class="case-media">
-              <img src="images/portfolio/branding/cheetos/2.webp" alt="Manipulação digital Cheetos Sweetos" loading="lazy">
-            </div>
-            <div class="case-info">
-              <span class="case-num">02</span>
-              <h3>Cheetos Sweetos</h3>
-              <p class="case-cat">Manipulação digital</p>
-              <p class="case-summary">Composição criativa com narrativa visual e transformação antes/depois.</p>
-              <span class="case-link">Ver projeto</span>
-            </div>
-          </button>
-        </article>
-
-        <article class="case" data-project="valhalla" data-category="digital">
-          <button type="button" class="case-trigger" data-project="valhalla" aria-label="Abrir projeto Valhalla">
-            <div class="case-media">
-              <img src="images/portfolio/digital/assassins-creed-valhalla/1.webp" alt="Manipulação Assassin's Creed Valhalla" loading="lazy">
-            </div>
-            <div class="case-info">
-              <span class="case-num">03</span>
-              <h3>Valhalla — Eivor</h3>
-              <p class="case-cat">Manipulação digital</p>
-              <p class="case-summary">Série cinematográfica com composição, clima épico e tratamento de imagem.</p>
-              <span class="case-link">Ver projeto</span>
-            </div>
-          </button>
-        </article>
-
-        <article class="case" data-project="granvita" data-category="print">
-          <button type="button" class="case-trigger" data-project="granvita" aria-label="Abrir projeto Granvita">
-            <div class="case-media">
-              <img src="images/portfolio/print/vulcano-material-publicitario/4.webp" alt="Material publicitário Granvita" loading="lazy">
-            </div>
-            <div class="case-info">
-              <span class="case-num">04</span>
-              <h3>Granvita</h3>
-              <p class="case-cat">Material publicitário</p>
-              <p class="case-summary">Peças para outdoor e impressos com linguagem forte para o agronegócio.</p>
-              <span class="case-link">Ver projeto</span>
-            </div>
-          </button>
-        </article>
-
-        <article class="case" data-project="trots" data-category="social">
-          <button type="button" class="case-trigger" data-project="trots" aria-label="Abrir projeto Trot's">
-            <div class="case-media">
-              <img src="images/portfolio/social/campanhas/1.webp" alt="Campanha Trot's" loading="lazy">
-            </div>
-            <div class="case-info">
-              <span class="case-num">05</span>
-              <h3>Trot's</h3>
-              <p class="case-cat">Social media</p>
-              <p class="case-summary">Campanha para redes com mensagem direta e identidade memorável.</p>
-              <span class="case-link">Ver projeto</span>
-            </div>
-          </button>
-        </article>
-
-        <article class="case" data-project="audi" data-category="web">
-          <button type="button" class="case-trigger" data-project="audi" aria-label="Abrir projeto Audi RS7">
-            <div class="case-media">
-              <img src="images/portfolio/web/landing-pages/2.webp" alt="Web design Audi RS7" loading="lazy">
-            </div>
-            <div class="case-info">
-              <span class="case-num">06</span>
-              <h3>Audi RS7</h3>
-              <p class="case-cat">Web design</p>
-              <p class="case-summary">Conceito de página principal para lançamento com foco em presença e impacto.</p>
-              <span class="case-link">Ver projeto</span>
-            </div>
-          </button>
-        </article>
-      </div>
-    </section>
-
-    <section class="section services" id="servicos" aria-labelledby="servicos-title">
-      <div class="section-head">
-        <div>
-          <p class="section-index">02 — Escopo</p>
-          <h2 id="servicos-title">Serviços</h2>
-        </div>
-        <p class="section-lead">Soluções completas para construir, organizar e comunicar a sua marca.</p>
-      </div>
-
-      <ol class="service-grid">
-        <li>
-          <span class="svc-num">01</span>
-          <h3>Identidade visual</h3>
-          <p>Logo, cores, tipografia e guidelines para uma marca coerente e memorável.</p>
-        </li>
-        <li>
-          <span class="svc-num">02</span>
-          <h3>Material publicitário</h3>
-          <p>Banners, flyers, cartões e impressos com hierarquia clara e acabamento profissional.</p>
-        </li>
-        <li>
-          <span class="svc-num">03</span>
-          <h3>Social media</h3>
-          <p>Posts, stories e capas com consistência visual e ritmo de publicação.</p>
-        </li>
-        <li>
-          <span class="svc-num">04</span>
-          <h3>Manipulação digital</h3>
-          <p>Retoque, composição e imagens de alto impacto para campanhas e produtos.</p>
-        </li>
-        <li>
-          <span class="svc-num">05</span>
-          <h3>Landing pages</h3>
-          <p>Páginas responsivas com foco em conversão, clareza e experiência.</p>
-        </li>
-        <li>
-          <span class="svc-num">06</span>
-          <h3>Edição de vídeo</h3>
-          <p>Montagem linear, correção de cor e ritmo narrativo sem excessos.</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="section method" id="metodo" aria-labelledby="metodo-title">
-      <div class="section-head">
-        <div>
-          <p class="section-index">Método</p>
-          <h2 id="metodo-title">Como o projeto caminha</h2>
-        </div>
-        <p class="section-lead">Um fluxo organizado para sair da ideia e chegar em entregas consistentes.</p>
-      </div>
-      <ol class="method-steps">
-        <li>
-          <span>01</span>
-          <h3>Briefing</h3>
-          <p>Entendo o contexto, o público e o que a marca precisa comunicar.</p>
-        </li>
-        <li>
-          <span>02</span>
-          <h3>Direção</h3>
-          <p>Defino estética, referências e o sistema visual do projeto.</p>
-        </li>
-        <li>
-          <span>03</span>
-          <h3>Entrega</h3>
-          <p>Finalizo arquivos organizados, prontos para uso real no dia a dia.</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="section about" id="sobre" aria-labelledby="sobre-title">
-      <div class="about-layout">
-        <div class="about-photo">
-          <img src="sua-foto.webp" alt="Luís Felipe, designer gráfico" width="640" height="800" loading="lazy">
-          <p class="about-caption">Luís Felipe · LFZ.DSGN</p>
-        </div>
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-grid">
         <div class="about-copy">
-          <p class="section-index">03 — Perfil</p>
-          <h2 id="sobre-title">Sobre</h2>
-          <p class="about-lead">Designer gráfico em Apucarana-PR, com trajetória desde 2017.</p>
-          <p>
-            Trabalho na interseção entre estética e organização: transformar conceitos em
-            sistemas visuais claros, elegantes e aplicáveis. Do branding à manipulação digital,
-            cada entrega busca presença e coerência.
-          </p>
+          <p class="eyebrow">About</p>
+          <h2>Luís Felipe</h2>
+          <p class="about-lead">Designer gráfico em Apucarana-PR, desde 2017.</p>
+          <p>Trabalho com identidade visual, branding e manipulação digital. O foco é transformar conceitos em sistemas visuais claros, elegantes e prontos para circular.</p>
           <dl class="about-facts">
-            <div>
-              <dt>Base</dt>
-              <dd>Apucarana · Brasil</dd>
-            </div>
-            <div>
-              <dt>Atuação</dt>
-              <dd>Desde 2017</dd>
-            </div>
-            <div>
-              <dt>Ferramentas</dt>
-              <dd>Photoshop · Illustrator · InDesign · Lightroom</dd>
-            </div>
+            <div><dt>Base</dt><dd>Apucarana · Brasil</dd></div>
+            <div><dt>Disciplinas</dt><dd>Brand · Digital · Print · Social · Web</dd></div>
+            <div><dt>Ferramentas</dt><dd>Photoshop · Illustrator · InDesign · Lightroom</dd></div>
           </dl>
         </div>
-      </div>
-    </section>
-
-    <section class="section contact" id="contato" aria-labelledby="contato-title">
-      <div class="contact-band">
-        <div class="contact-copy">
-          <p class="section-index">04 — Contato</p>
-          <h2 id="contato-title">Vamos construir o próximo projeto com direção e elegância.</h2>
-          <p>Conte o que você precisa. Respondo por WhatsApp ou e-mail com objetividade.</p>
-        </div>
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>
-          <a class="btn btn-ghost" href="mailto:lfz.dsgn.studio@gmail.com">lfz.dsgn.studio@gmail.com</a>
-          <a class="contact-phone" href="tel:+5543999541462">+55 (43) 9 9954-1462</a>
+        <div class="about-photo">
+          <img src="sua-foto.webp" alt="Luís Felipe" width="720" height="900" loading="lazy">
         </div>
       </div>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <p class="footer-brand">LFZ.DSGN</p>
-      <p class="footer-note">© <span id="year"></span> Luís Felipe · Design gráfico</p>
-      <div class="footer-links">
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Vamos falar do próximo projeto.</h2>
+      <div class="contact-links">
+        <a href="https://wa.me/5543999541462?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="mailto:lfz.dsgn.studio@gmail.com">lfz.dsgn.studio@gmail.com</a>
+        <a href="tel:+5543999541462">+55 43 99954-1462</a>
+      </div>
+      <div class="contact-social">
         <a href="https://www.behance.net/luisfebarbosa6" target="_blank" rel="noopener noreferrer">Behance</a>
         <a href="https://www.instagram.com/lfz.dsgn/" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="https://www.linkedin.com/in/lfzdsgn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-    </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>LFZ.DSGN</span>
+    <span>© <span id="year"></span></span>
   </footer>
 
   <div class="lightbox" id="lightbox" hidden>
     <div class="lightbox-backdrop" data-close></div>
     <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
-      <button type="button" class="lightbox-close" data-close aria-label="Fechar">&times;</button>
+      <button type="button" class="lightbox-close" data-close aria-label="Fechar">Fechar</button>
       <div class="lightbox-header">
         <h3 id="lightbox-title"></h3>
         <p id="lightbox-desc"></p>
@@ -347,6 +228,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=atelier-20260915" defer></script>
+  <script src="script.js?v=bergh-level-1" defer></script>
 </body>
 </html>

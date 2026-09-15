@@ -81,72 +81,43 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  const header = document.querySelector(".site-header");
-  const toggle = document.querySelector(".nav-toggle");
-  const mobileNav = document.getElementById("nav-mobile");
-
-  const closeNav = () => {
-    document.body.classList.remove("nav-open");
-    if (toggle) toggle.setAttribute("aria-expanded", "false");
-    if (mobileNav) mobileNav.hidden = true;
+  // Mobile drawer
+  const burger = document.querySelector(".nav-burger");
+  const drawer = document.getElementById("drawer");
+  const closeDrawer = () => {
+    if (!drawer) return;
+    drawer.hidden = true;
+    burger?.setAttribute("aria-expanded", "false");
   };
-
-  const openNav = () => {
-    document.body.classList.add("nav-open");
-    if (toggle) toggle.setAttribute("aria-expanded", "true");
-    if (mobileNav) mobileNav.hidden = false;
-  };
-
-  if (toggle && mobileNav) {
-    toggle.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      if (mobileNav.hidden) openNav();
-      else closeNav();
-    });
-  }
-
-  mobileNav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeNav);
+  burger?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const open = drawer.hidden;
+    drawer.hidden = !open;
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
   });
+  drawer?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeDrawer));
 
-  // Filters
-  const filterButtons = document.querySelectorAll(".work-filters button");
-  const cases = document.querySelectorAll(".case");
+  // Panel inview + progress
+  const panels = [...document.querySelectorAll(".panel.project")];
+  const progress = document.getElementById("progress-label");
+  const total = String(panels.length).padStart(2, "0");
 
-  filterButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter;
-      filterButtons.forEach((b) => {
-        b.classList.toggle("is-active", b === btn);
-        b.setAttribute("aria-selected", b === btn ? "true" : "false");
-      });
-      cases.forEach((item) => {
-        const match = filter === "all" || item.dataset.category === filter;
-        item.classList.toggle("is-hidden", !match);
-      });
-    });
-  });
-
-  // Reveal cases on scroll
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
+            entry.target.classList.add("is-inview");
+            const num = entry.target.getAttribute("data-panel");
+            if (progress && num) progress.textContent = `${num} / ${total}`;
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.45 }
     );
-    cases.forEach((el, i) => {
-      el.style.transitionDelay = `${Math.min(i * 70, 280)}ms`;
-      io.observe(el);
-    });
+    panels.forEach((p) => io.observe(p));
   } else {
-    cases.forEach((el) => el.classList.add("is-visible"));
+    panels.forEach((p) => p.classList.add("is-inview"));
   }
 
   // Lightbox
@@ -159,20 +130,17 @@
   const openProject = (id) => {
     const project = projects[id];
     if (!project || !lightbox) return;
-
     lastFocus = document.activeElement;
     titleEl.textContent = project.title;
     descEl.textContent = project.description;
     galleryEl.innerHTML = "";
-
-    project.media.forEach((src, index) => {
+    project.media.forEach((src, i) => {
       const img = document.createElement("img");
       img.src = src;
-      img.alt = `${project.title} — peça ${index + 1}`;
-      img.loading = index < 2 ? "eager" : "lazy";
+      img.alt = `${project.title} — ${i + 1}`;
+      img.loading = i < 2 ? "eager" : "lazy";
       galleryEl.appendChild(img);
     });
-
     if (project.video) {
       const video = document.createElement("video");
       video.src = project.video;
@@ -181,7 +149,6 @@
       video.preload = "metadata";
       galleryEl.appendChild(video);
     }
-
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
     lightbox.querySelector(".lightbox-close")?.focus();
@@ -195,7 +162,7 @@
     lastFocus?.focus?.();
   };
 
-  document.querySelectorAll(".case-trigger").forEach((el) => {
+  document.querySelectorAll(".open-project").forEach((el) => {
     el.addEventListener("click", () => openProject(el.dataset.project));
   });
 
@@ -203,17 +170,10 @@
     el.addEventListener("click", closeLightbox);
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       closeLightbox();
-      closeNav();
+      closeDrawer();
     }
   });
-
-  const onScroll = () => {
-    if (!header) return;
-    header.style.boxShadow = window.scrollY > 8 ? "0 1px 0 var(--line)" : "none";
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 })();
