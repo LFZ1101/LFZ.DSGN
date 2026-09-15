@@ -828,7 +828,12 @@ body.drawer-open .section-chip {
   .topnav,
   .top-cta { display: none; }
   .nav-burger { display: inline-flex; align-items: center; }
-  .topbar { grid-template-columns: 1fr auto; z-index: 95; }
+  .topbar {
+    grid-template-columns: 1fr auto;
+    z-index: 95;
+    background: linear-gradient(180deg, rgba(18, 18, 16, 0.96) 55%, transparent);
+  }
+  .title-left { display: none; }
   .section-chip-hint { display: none; }
   .frame-ruler { display: none; }
   .chrome {
