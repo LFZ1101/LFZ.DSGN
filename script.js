@@ -318,6 +318,51 @@
   const titleRight = document.getElementById("title-right");
   const counter = document.getElementById("counter");
 
+  const fitSideTitle = (el, side = "left") => {
+    if (!el || getComputedStyle(el).display === "none") return;
+    const mobile = window.matchMedia("(max-width: 900px)").matches;
+    el.style.transform = "";
+    el.style.fontSize = "";
+
+    const frameW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--frame-w")) || window.innerWidth * 0.45;
+    const maxW = mobile
+      ? Math.min(window.innerWidth * 0.9, 520)
+      : Math.max(120, (window.innerWidth - frameW) / 2 - 28);
+
+    const natural = el.scrollWidth || el.offsetWidth;
+    if (!natural || natural <= maxW) {
+      el.style.transform = mobile
+        ? "none"
+        : side === "left"
+          ? "translateX(-0.5vw)"
+          : "translateX(0.5vw)";
+      return;
+    }
+
+    const scale = Math.max(0.4, maxW / natural);
+    if (mobile) {
+      el.style.transform = `scale(${scale})`;
+      el.style.transformOrigin = "center bottom";
+    } else if (side === "left") {
+      el.style.transform = `translateX(-0.5vw) scale(${scale})`;
+      el.style.transformOrigin = "left center";
+    } else {
+      el.style.transform = `translateX(0.5vw) scale(${scale})`;
+      el.style.transformOrigin = "right center";
+    }
+  };
+
+  const syncSideTitles = (title, side) => {
+    if (titleLeft) {
+      titleLeft.textContent = title;
+      fitSideTitle(titleLeft, "left");
+    }
+    if (titleRight) {
+      titleRight.textContent = side;
+      fitSideTitle(titleRight, "right");
+    }
+  };
+
   const syncSlide = (swiper) => {
     const slide = swiper.slides[swiper.activeIndex];
     if (!slide) return;
@@ -327,14 +372,13 @@
     const total = String(swiper.slides.filter((s) => !s.classList.contains("swiper-slide-hidden")).length || swiper.slides.length).padStart(2, "0");
     const current = String(swiper.realIndex + 1).padStart(2, "0");
 
-    if (titleLeft && titleRight) {
-      titleLeft.classList.add("is-swap");
-      titleRight.classList.add("is-swap");
+    if (titleLeft || titleRight) {
+      titleLeft?.classList.add("is-swap");
+      titleRight?.classList.add("is-swap");
       setTimeout(() => {
-        titleLeft.textContent = title;
-        titleRight.textContent = side;
-        titleLeft.classList.remove("is-swap");
-        titleRight.classList.remove("is-swap");
+        syncSideTitles(title, side);
+        titleLeft?.classList.remove("is-swap");
+        titleRight?.classList.remove("is-swap");
       }, 220);
     }
 
@@ -370,6 +414,14 @@
       900: { slidesPerView: 1.35, spaceBetween: 28 },
     },
   });
+
+  const refitTitles = () => {
+    fitSideTitle(titleLeft, "left");
+    fitSideTitle(titleRight, "right");
+  };
+  window.addEventListener("resize", refitTitles);
+  if (document.fonts?.ready) document.fonts.ready.then(refitTitles);
+  else setTimeout(refitTitles, 300);
 
   // Views
   const stages = {

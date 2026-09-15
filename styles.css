@@ -392,27 +392,35 @@ body.drawer-open .section-chip {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2vw;
+  padding: 0 clamp(0.5rem, 1.5vw, 1.5rem);
   pointer-events: none;
-  overflow: hidden;
+  overflow: visible;
 }
 .title-left,
 .title-right {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(3.5rem, 11vw, 9.5rem);
-  line-height: 0.85;
+  font-size: clamp(2.6rem, 8.5vw, 7.5rem);
+  line-height: 0.9;
   letter-spacing: -0.04em;
   color: rgba(244, 240, 230, 0.18);
   transition: opacity 0.45s var(--ease), transform 0.6s var(--ease);
-  max-width: 42vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 36vw;
+  overflow: visible;
   white-space: nowrap;
+  will-change: transform;
 }
-.title-left { transform: translateX(-1vw); }
-.title-right { transform: translateX(1vw); text-align: right; }
+.title-left {
+  transform: translateX(-0.5vw);
+  transform-origin: left center;
+  text-align: left;
+}
+.title-right {
+  transform: translateX(0.5vw);
+  transform-origin: right center;
+  text-align: right;
+}
 .title-left.is-swap,
 .title-right.is-swap {
   opacity: 0;
@@ -940,11 +948,25 @@ body.drawer-open .section-chip {
 
 @media (max-width: 900px) {
   body { overflow: auto; }
+  .title-layer {
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 1rem 28vh;
+    overflow: hidden;
+  }
   .title-right { display: none; }
   .title-left {
-    max-width: 90vw;
-    font-size: clamp(2.8rem, 14vw, 4.5rem);
-    opacity: 0.22;
+    display: block !important;
+    max-width: min(92vw, 520px);
+    width: max-content;
+    font-size: clamp(2.4rem, 12vw, 3.8rem);
+    color: rgba(244, 240, 230, 0.16);
+    text-align: center;
+    transform: none;
+    transform-origin: center bottom;
+  }
+  .title-left.is-swap {
+    transform: translateY(10px);
   }
   :root {
     --frame-w: min(90vw, 420px);
@@ -963,7 +985,6 @@ body.drawer-open .section-chip {
     z-index: 95;
     background: #121210;
   }
-  .title-left { display: none !important; }
   .section-chip-hint { display: none; }
   .frame-ruler { display: none; }
   .chrome {
