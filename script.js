@@ -69,6 +69,20 @@
         "images/portfolio/social/campanhas/4.webp",
       ],
     },
+    rose: {
+      title: "Rose Pastéis",
+      label: "Social media",
+      description:
+        "Projeto de social media para reforçar a identidade da Rose Pastéis, pastelaria tradicional de Apucarana desde 1995. Cores quentes, foto de produto e comunicação próxima para gerar desejo e fortalecer a presença digital.",
+      media: [
+        "images/portfolio/social/rose-pasteis/1.webp",
+        "images/portfolio/social/rose-pasteis/2.webp",
+        "images/portfolio/social/rose-pasteis/3.webp",
+        "images/portfolio/social/rose-pasteis/4.webp",
+        "images/portfolio/social/rose-pasteis/5.webp",
+        "images/portfolio/social/rose-pasteis/6.webp",
+      ],
+    },
     audi: {
       title: "Audi RS7",
       label: "Landing page",
