@@ -148,12 +148,14 @@
     if (!drawer) return;
     drawer.hidden = true;
     burger?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("drawer-open");
   };
   burger?.addEventListener("click", (e) => {
     e.preventDefault();
     const open = drawer.hidden;
     drawer.hidden = !open;
     burger.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("drawer-open", open);
   });
   drawer?.querySelectorAll("[data-view], a").forEach((el) => {
     el.addEventListener("click", () => closeDrawer());

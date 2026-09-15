@@ -188,14 +188,19 @@ a { cursor: pointer; }
 .mobile-drawer {
   position: fixed;
   inset: 4.5rem 0 auto;
-  z-index: 45;
+  z-index: 90;
   display: grid;
   gap: 0.15rem;
   padding: 0.75rem 1rem 1.1rem;
-  background: rgba(18, 18, 16, 0.96);
+  background: #121210;
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 }
 .mobile-drawer[hidden] { display: none !important; }
+body.drawer-open .section-chip {
+  opacity: 0;
+  visibility: hidden;
+}
 .mobile-drawer button,
 .mobile-drawer a {
   display: flex;
@@ -819,17 +824,36 @@ a { cursor: pointer; }
   .about-shot { max-width: 360px; }
   .services-grid { grid-template-columns: 1fr; }
   .filters { display: none; }
+  .chrome-right .chrome-label { display: none; }
   .topnav,
   .top-cta { display: none; }
   .nav-burger { display: inline-flex; align-items: center; }
-  .topbar { grid-template-columns: 1fr auto; }
+  .topbar { grid-template-columns: 1fr auto; z-index: 95; }
   .section-chip-hint { display: none; }
+  .frame-ruler { display: none; }
   .chrome {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.55rem;
+    padding-bottom: calc(0.85rem + env(safe-area-inset-bottom, 0px));
   }
-  .chrome-right { width: 100%; justify-content: space-between; }
-  .panel-stage { overflow: auto; -webkit-overflow-scrolling: touch; }
+  .chrome-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .list-wrap,
+  .panel-stage {
+    padding-bottom: 8.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .panel-stage { overflow: auto; }
+  body.is-panel-scroll .section-chip { display: none; }
+  .list-head .mono,
+  .services-head .mono,
+  .panel-grid .mono:first-child,
+  .contact-block > .mono:first-child {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -841,4 +865,20 @@ a { cursor: pointer; }
     max-width: calc(100% - 2rem);
   }
   .services-grid { grid-template-columns: 1fr; }
+  .list-row {
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0.65rem 0.85rem;
+  }
+  .list-row em {
+    grid-column: 2;
+    margin-top: -0.35rem;
+  }
+  .lightbox-dialog {
+    max-height: min(92vh, 940px);
+    padding: 1rem 0.85rem 1.25rem;
+  }
+  .lightbox-close {
+    top: 0.65rem;
+    right: 0.65rem;
+  }
 }
