@@ -111,6 +111,31 @@
         "images/portfolio/web/dunamis/6.webp",
       ],
     },
+    viane: {
+      title: "Viane Brasil",
+      label: "Identidade visual",
+      description:
+        "Identidade completa para consultoria empresarial — logo kit, tipografia, paleta, mockups e social media. Gestão que organiza, estratégia que multiplica.",
+      media: [
+        "images/portfolio/branding/viane/1.webp",
+        "images/portfolio/branding/viane/2.webp",
+        "images/portfolio/branding/viane/3.webp",
+        "images/portfolio/branding/viane/4.webp",
+        { youtube: "https://www.youtube.com/embed/I47O4XmVHog" },
+        "images/portfolio/branding/viane/6.webp",
+        "images/portfolio/branding/viane/7.webp",
+        "images/portfolio/branding/viane/8.webp",
+        "images/portfolio/branding/viane/9.webp",
+        "images/portfolio/branding/viane/10.webp",
+        "images/portfolio/branding/viane/11.webp",
+        "images/portfolio/branding/viane/12.webp",
+        "images/portfolio/branding/viane/13.webp",
+        "images/portfolio/branding/viane/14.webp",
+        "images/portfolio/branding/viane/15.webp",
+        "images/portfolio/branding/viane/16.webp",
+        "images/portfolio/branding/viane/17.webp",
+      ],
+    },
   };
 
   const yearEl = document.getElementById("year");
@@ -335,9 +360,26 @@
       }
     }
     lbGallery.innerHTML = "";
-    project.media.forEach((src, i) => {
+    project.media.forEach((item, i) => {
+      if (item && typeof item === "object" && item.youtube) {
+        const wrap = document.createElement("div");
+        wrap.className = "lb-video";
+        const iframe = document.createElement("iframe");
+        iframe.src = item.youtube;
+        iframe.title = `${project.title} — vídeo`;
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute(
+          "allow",
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        );
+        iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+        iframe.allowFullscreen = true;
+        wrap.appendChild(iframe);
+        lbGallery.appendChild(wrap);
+        return;
+      }
       const img = document.createElement("img");
-      img.src = src;
+      img.src = item;
       img.alt = `${project.title} ${i + 1}`;
       img.loading = i < 2 ? "eager" : "lazy";
       lbGallery.appendChild(img);
