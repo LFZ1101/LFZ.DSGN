@@ -740,10 +740,15 @@ body.is-touch a { cursor: pointer; }
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 120;
+  z-index: 220;
   display: grid;
   place-items: center;
   padding: 1rem;
+}
+.lightbox:not([hidden]) ~ .cursor,
+body:has(.lightbox:not([hidden])) .cursor {
+  opacity: 0 !important;
+  visibility: hidden;
 }
 .lightbox-backdrop {
   position: absolute;

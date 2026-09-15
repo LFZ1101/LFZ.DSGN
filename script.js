@@ -399,6 +399,7 @@
     }
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
+    cursor?.classList.remove("is-active", "is-on");
     gsap.fromTo(".lightbox-dialog", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" });
   };
 
