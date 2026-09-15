@@ -321,36 +321,29 @@
   const fitSideTitle = (el, side = "left") => {
     if (!el || getComputedStyle(el).display === "none") return;
     const mobile = window.matchMedia("(max-width: 900px)").matches;
-    el.style.transform = "";
+    el.style.transform = "none";
     el.style.fontSize = "";
 
     const frameEl = document.querySelector(".swiper-slide-active .frame") || document.querySelector(".frame");
     const frameW = frameEl ? frameEl.getBoundingClientRect().width : window.innerWidth * 0.45;
+    const edgePad = mobile ? 28 : 48;
     const maxW = mobile
-      ? Math.min(window.innerWidth * 0.86, 480)
-      : Math.max(120, (window.innerWidth - frameW) / 2 - 56);
+      ? Math.min(window.innerWidth - edgePad * 2, 460)
+      : Math.max(100, (window.innerWidth - frameW) / 2 - edgePad * 2);
 
-    const natural = el.scrollWidth || el.offsetWidth;
-    if (!natural || natural <= maxW) {
-      el.style.transform = mobile
-        ? "none"
-        : side === "left"
-          ? "translateX(-0.5vw)"
-          : "translateX(0.5vw)";
+    // Measure unscaled width
+    const natural = Math.max(el.scrollWidth, el.getBoundingClientRect().width);
+    if (!natural) return;
+
+    const scale = Math.min(1, (maxW / natural) * 0.94);
+    if (mobile) {
+      el.style.transform = scale < 0.999 ? `scale(${scale})` : "none";
+      el.style.transformOrigin = "center bottom";
       return;
     }
-
-    const scale = Math.max(0.4, maxW / natural);
-    if (mobile) {
-      el.style.transform = `scale(${scale})`;
-      el.style.transformOrigin = "center bottom";
-    } else if (side === "left") {
-      el.style.transform = `translateX(-0.5vw) scale(${scale})`;
-      el.style.transformOrigin = "left center";
-    } else {
-      el.style.transform = `translateX(0.5vw) scale(${scale})`;
-      el.style.transformOrigin = "right center";
-    }
+    const base = side === "left" ? "translateX(0)" : "translateX(0)";
+    el.style.transform = scale < 0.999 ? `${base} scale(${scale})` : base;
+    el.style.transformOrigin = side === "left" ? "left center" : "right center";
   };
 
   const syncSideTitles = (title, side) => {
