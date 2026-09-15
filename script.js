@@ -194,23 +194,19 @@
       el.classList.toggle("is-active", on);
       el.hidden = !on;
     });
+
     document.querySelectorAll(".nav-item").forEach((btn) => {
-      btn.classList.toggle("is-active", btn.dataset.view === name || (name === "list" && btn.dataset.view === "slider" && false) || (name === "slider" && btn.dataset.view === "slider"));
-      if (name === "list" || name === "slider") {
-        btn.classList.toggle("is-active", btn.dataset.view === "slider");
-      } else {
-        btn.classList.toggle("is-active", btn.dataset.view === name);
-      }
+      const active =
+        btn.dataset.view === name ||
+        (btn.dataset.view === "slider" && (name === "slider" || name === "list"));
+      btn.classList.toggle("is-active", active);
     });
+
     document.querySelectorAll(".mode-toggle button").forEach((btn) => {
-      btn.classList.toggle("is-active", btn.dataset.view === name || (name !== "list" && name !== "slider" ? btn.dataset.view === "slider" && false : btn.dataset.view === name));
-      if (name === "slider" || name === "list") {
-        btn.classList.toggle("is-active", btn.dataset.view === name);
-      }
+      btn.classList.toggle("is-active", btn.dataset.view === name);
     });
-    if (name === "slider") {
-      requestAnimationFrame(() => swiper.update());
-    }
+
+    if (name === "slider") requestAnimationFrame(() => swiper.update());
   };
 
   document.querySelectorAll("[data-view]").forEach((el) => {
