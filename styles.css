@@ -59,6 +59,14 @@ body.is-touch a { cursor: pointer; }
   gap: 1.25rem;
   background: var(--bg);
   transition: opacity 0.6s var(--ease), visibility 0.6s;
+  animation: loaderHide 0.6s 1.6s forwards;
+}
+@keyframes loaderHide {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 .loader.is-done {
   opacity: 0;

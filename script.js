@@ -163,7 +163,7 @@
   const swiper = new Swiper("#work-swiper", {
     direction: "vertical",
     slidesPerView: 1.35,
-    centeredSlides: true;
+    centeredSlides: true,
     spaceBetween: 28,
     mousewheel: { forceToAxis: true, sensitivity: 0.85, releaseOnEdges: true },
     speed: 750,
