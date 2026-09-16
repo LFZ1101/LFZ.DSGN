@@ -496,6 +496,7 @@
   const stages = {
     slider: document.getElementById("view-slider"),
     list: document.getElementById("view-list"),
+    videos: document.getElementById("view-videos"),
     services: document.getElementById("view-services"),
     about: document.getElementById("view-about"),
     contact: document.getElementById("view-contact"),
@@ -504,13 +505,15 @@
   const sectionMeta = {
     slider: { num: "01", label: "Projetos", hint: "— portfólio selecionado" },
     list: { num: "01", label: "Projetos", hint: "— lista completa" },
-    services: { num: "02", label: "Serviços", hint: "— o que eu entrego" },
-    about: { num: "03", label: "Sobre", hint: "— quem faz o trabalho" },
-    contact: { num: "04", label: "Contato", hint: "— vamos conversar" },
+    videos: { num: "02", label: "Vídeos", hint: "— edição e motion" },
+    services: { num: "03", label: "Serviços", hint: "— o que eu entrego" },
+    about: { num: "04", label: "Sobre", hint: "— quem faz o trabalho" },
+    contact: { num: "05", label: "Contato", hint: "— vamos conversar" },
   };
 
   const chip = document.getElementById("section-chip");
   const chrome = document.getElementById("chrome");
+  const panelViews = new Set(["videos", "services", "about", "contact"]);
 
   const setView = (name) => {
     Object.entries(stages).forEach(([key, el]) => {
@@ -540,8 +543,8 @@
       chip.querySelector(".section-chip-hint").textContent = meta.hint;
     }
 
-    chrome?.classList.toggle("is-panel-mode", name === "services" || name === "about" || name === "contact");
-    document.body.classList.toggle("is-panel-scroll", name === "services" || name === "about" || name === "contact");
+    chrome?.classList.toggle("is-panel-mode", panelViews.has(name));
+    document.body.classList.toggle("is-panel-scroll", panelViews.has(name));
 
     if (name === "slider") requestAnimationFrame(() => swiper.update());
   };
