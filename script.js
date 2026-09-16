@@ -141,26 +141,6 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  // Mobile drawer
-  const burger = document.querySelector(".nav-burger");
-  const drawer = document.getElementById("mobile-drawer");
-  const closeDrawer = () => {
-    if (!drawer) return;
-    drawer.hidden = true;
-    burger?.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("drawer-open");
-  };
-  burger?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const open = drawer.hidden;
-    drawer.hidden = !open;
-    burger.setAttribute("aria-expanded", open ? "true" : "false");
-    document.body.classList.toggle("drawer-open", open);
-  });
-  drawer?.querySelectorAll("[data-view], a").forEach((el) => {
-    el.addEventListener("click", () => closeDrawer());
-  });
-
   // Touch detection
   const coarse = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
   if (coarse) document.body.classList.add("is-touch");
@@ -450,6 +430,8 @@
         btn.dataset.view === name ||
         (btn.dataset.view === "slider" && (name === "slider" || name === "list"));
       btn.classList.toggle("is-active", active);
+      if (active) btn.setAttribute("aria-current", "page");
+      else btn.removeAttribute("aria-current");
     });
 
     document.querySelectorAll(".mode-toggle button").forEach((btn) => {
@@ -465,7 +447,6 @@
 
     chrome?.classList.toggle("is-panel-mode", name === "services" || name === "about" || name === "contact");
     document.body.classList.toggle("is-panel-scroll", name === "services" || name === "about" || name === "contact");
-    closeDrawer();
 
     if (name === "slider") requestAnimationFrame(() => swiper.update());
   };
