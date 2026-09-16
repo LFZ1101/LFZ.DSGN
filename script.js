@@ -142,9 +142,21 @@
       description:
         "Série institucional para a FC+ — estratégia de marca, identidade visual e bastidores criativos com ritmo e narrativa claros.",
       media: [
-        { video: "images/portfolio/video/fc-plus/estrategia-marca.mp4", caption: "FC+ — Estratégia de Marca" },
-        { video: "images/portfolio/video/fc-plus/identidade-visual.mp4", caption: "FC+ — Identidade Visual" },
-        { video: "images/portfolio/video/fc-plus/bastidores-criativos.mp4", caption: "FC+ — Bastidores Criativos" },
+        {
+          video: "images/portfolio/video/fc-plus/estrategia-marca.mp4",
+          caption: "FC+ — Estratégia de Marca",
+          note: "Conteúdo institucional sobre propósito, posicionamento e a importância de uma estratégia consistente para as marcas.",
+        },
+        {
+          video: "images/portfolio/video/fc-plus/identidade-visual.mp4",
+          caption: "FC+ — Identidade Visual",
+          note: "Apresentação da identidade visual da FC+ aplicada a diferentes materiais, dispositivos e espaços urbanos.",
+        },
+        {
+          video: "images/portfolio/video/fc-plus/bastidores-criativos.mp4",
+          caption: "FC+ — Bastidores Criativos",
+          note: "Bastidores do processo de criação digital da FC+, passando pelo Photoshop e pela produção de conteúdo para redes sociais.",
+        },
       ],
     },
     "western-co": {
@@ -153,10 +165,26 @@
       description:
         "Campanhas de moda western com peças de produto e lookbook — botas, jaqueta de franjas e looks em ritmo publicitário.",
       media: [
-        { video: "images/portfolio/video/western-co/botas-texanas.mp4", caption: "Western&Co — Botas Texanas" },
-        { video: "images/portfolio/video/western-co/jaqueta-franjas.mp4", caption: "Western&Co — Jaqueta de Franjas" },
-        { video: "images/portfolio/video/western-co/look-cowgirl.mp4", caption: "Western&Co — Look Cowgirl" },
-        { video: "images/portfolio/video/western-co/look-rosa.mp4", caption: "Western&Co — Look Rosa" },
+        {
+          video: "images/portfolio/video/western-co/botas-texanas.mp4",
+          caption: "Western&Co — Botas Texanas",
+          note: "Vídeo de produto com foco nos detalhes, na textura e no acabamento de um par de botas texanas.",
+        },
+        {
+          video: "images/portfolio/video/western-co/jaqueta-franjas.mp4",
+          caption: "Western&Co — Jaqueta de Franjas",
+          note: "Fashion film destacando uma jaqueta western com franjas e aplicações, combinando produto e lifestyle.",
+        },
+        {
+          video: "images/portfolio/video/western-co/look-cowgirl.mp4",
+          caption: "Western&Co — Look Cowgirl",
+          note: "Fashion film vertical que apresenta um look cowgirl feminino em uma ambientação rústica.",
+        },
+        {
+          video: "images/portfolio/video/western-co/look-rosa.mp4",
+          caption: "Western&Co — Look Rosa",
+          note: "Editorial western com modelo, cavalo e peças em rosa, explorando moda e identidade equestre.",
+        },
       ],
     },
     "edificio-sao-jose": {
@@ -165,7 +193,11 @@
       description:
         "Apresentação audiovisual do Edifício São José — arquitetura e imobiliário com leitura cinematográfica do espaço.",
       media: [
-        { video: "images/portfolio/video/edificio-sao-jose/apresentacao.mp4", caption: "Edifício São José — Apresentação" },
+        {
+          video: "images/portfolio/video/edificio-sao-jose/apresentacao.mp4",
+          caption: "Edifício São José — Apresentação",
+          note: "Vídeo imobiliário do Edifício São José, valorizando o empreendimento e sua presença na paisagem urbana.",
+        },
       ],
     },
     "my-eyes": {
@@ -174,7 +206,11 @@
       description:
         "Motion design e cultura pop — poster design animado com timing preciso e presença visual forte.",
       media: [
-        { video: "images/portfolio/video/my-eyes/poster-design.mp4", caption: "My Eyes — Poster Design" },
+        {
+          video: "images/portfolio/video/my-eyes/poster-design.mp4",
+          caption: "My Eyes — Poster Design",
+          note: "Processo criativo de um pôster inspirado em “MY EYES”, acompanhando a construção no Photoshop até o resultado final.",
+        },
       ],
     },
     "conteudo-autoral": {
@@ -183,8 +219,16 @@
       description:
         "Conteúdo autoral e lifestyle — Life Is Short e Momentos 2025, com edição linear, ritmo e narrativa pessoal.",
       media: [
-        { video: "images/portfolio/video/conteudo-autoral/life-is-short.mp4", caption: "Life Is Short — Lifestyle" },
-        { video: "images/portfolio/video/conteudo-autoral/momentos-2025.mp4", caption: "Momentos 2025 — Vlog" },
+        {
+          video: "images/portfolio/video/conteudo-autoral/life-is-short.mp4",
+          caption: "Life Is Short — Lifestyle",
+          note: "Montagem dinâmica sobre intensidade e liberdade, conectando mar, música, velocidade e lifestyle.",
+        },
+        {
+          video: "images/portfolio/video/conteudo-autoral/momentos-2025.mp4",
+          caption: "Momentos 2025 — Vlog",
+          note: "Recorte de momentos de 2025 entre viagens, música, estrada e encontros, reunidos em uma edição curta e atmosférica.",
+        },
       ],
     },
   };
@@ -587,11 +631,22 @@
         video.setAttribute("controlsList", "nodownload");
         if (item.caption) video.setAttribute("aria-label", item.caption);
         wrap.appendChild(video);
-        if (item.caption) {
-          const cap = document.createElement("p");
-          cap.className = "lb-video-caption mono";
-          cap.textContent = item.caption;
-          wrap.appendChild(cap);
+        if (item.caption || item.note) {
+          const meta = document.createElement("div");
+          meta.className = "lb-video-meta";
+          if (item.caption) {
+            const cap = document.createElement("p");
+            cap.className = "lb-video-caption mono";
+            cap.textContent = item.caption;
+            meta.appendChild(cap);
+          }
+          if (item.note) {
+            const note = document.createElement("p");
+            note.className = "lb-video-note";
+            note.textContent = item.note;
+            meta.appendChild(note);
+          }
+          wrap.appendChild(meta);
         }
         lbGallery.appendChild(wrap);
         return;
