@@ -217,13 +217,8 @@
       title: "Conteúdo autoral",
       label: "Edição de vídeo · Vlog e lifestyle",
       description:
-        "Conteúdo autoral e lifestyle — Life Is Short e Momentos 2025, com edição linear, ritmo e narrativa pessoal.",
+        "Conteúdo autoral — Momentos 2025, com edição linear, ritmo e narrativa pessoal.",
       media: [
-        {
-          video: "images/portfolio/video/conteudo-autoral/life-is-short.mp4",
-          caption: "Life Is Short — Lifestyle",
-          note: "Montagem dinâmica sobre intensidade e liberdade, conectando mar, música, velocidade e lifestyle.",
-        },
         {
           video: "images/portfolio/video/conteudo-autoral/momentos-2025.mp4",
           caption: "Momentos 2025 — Vlog",
