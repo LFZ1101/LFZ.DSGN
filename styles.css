@@ -1064,6 +1064,9 @@ body.is-loading .stage {
     padding-bottom: 10.5rem;
     -webkit-overflow-scrolling: touch;
   }
+  .list-wrap {
+    padding-bottom: 12.5rem;
+  }
   .list-row {
     scroll-margin-bottom: 7.5rem;
   }
@@ -1104,6 +1107,9 @@ body.is-loading .stage {
   .list-row em {
     grid-column: 2;
     margin-top: -0.35rem;
+  }
+  .list-wrap {
+    padding-bottom: calc(13.5rem + env(safe-area-inset-bottom, 0px));
   }
   .lightbox-dialog {
     max-height: min(92vh, 940px);
