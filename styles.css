@@ -997,6 +997,10 @@ body.is-loading .stage {
   max-height: min(72vh, 820px);
   height: auto;
   background: #000;
+  object-fit: contain;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .lb-video-meta {
   width: min(100%, 34rem);

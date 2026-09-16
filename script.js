@@ -144,16 +144,19 @@
       media: [
         {
           video: "images/portfolio/video/fc-plus/estrategia-marca.mp4",
+          poster: "images/portfolio/video/fc-plus/estrategia-marca.poster.webp",
           caption: "FC+ — Estratégia de Marca",
           note: "Conteúdo institucional sobre propósito, posicionamento e a importância de uma estratégia consistente para as marcas.",
         },
         {
           video: "images/portfolio/video/fc-plus/identidade-visual.mp4",
+          poster: "images/portfolio/video/fc-plus/identidade-visual.poster.webp",
           caption: "FC+ — Identidade Visual",
           note: "Apresentação da identidade visual da FC+ aplicada a diferentes materiais, dispositivos e espaços urbanos.",
         },
         {
           video: "images/portfolio/video/fc-plus/bastidores-criativos.mp4",
+          poster: "images/portfolio/video/fc-plus/bastidores-criativos.poster.webp",
           caption: "FC+ — Bastidores Criativos",
           note: "Bastidores do processo de criação digital da FC+, passando pelo Photoshop e pela produção de conteúdo para redes sociais.",
         },
@@ -167,21 +170,25 @@
       media: [
         {
           video: "images/portfolio/video/western-co/botas-texanas.mp4",
+          poster: "images/portfolio/video/western-co/botas-texanas.poster.webp",
           caption: "Western&Co — Botas Texanas",
           note: "Vídeo de produto com foco nos detalhes, na textura e no acabamento de um par de botas texanas.",
         },
         {
           video: "images/portfolio/video/western-co/jaqueta-franjas.mp4",
+          poster: "images/portfolio/video/western-co/jaqueta-franjas.poster.webp",
           caption: "Western&Co — Jaqueta de Franjas",
           note: "Fashion film destacando uma jaqueta western com franjas e aplicações, combinando produto e lifestyle.",
         },
         {
           video: "images/portfolio/video/western-co/look-cowgirl.mp4",
+          poster: "images/portfolio/video/western-co/look-cowgirl.poster.webp",
           caption: "Western&Co — Look Cowgirl",
           note: "Fashion film vertical que apresenta um look cowgirl feminino em uma ambientação rústica.",
         },
         {
           video: "images/portfolio/video/western-co/look-rosa.mp4",
+          poster: "images/portfolio/video/western-co/look-rosa.poster.webp",
           caption: "Western&Co — Look Rosa",
           note: "Editorial western com modelo, cavalo e peças em rosa, explorando moda e identidade equestre.",
         },
@@ -195,6 +202,7 @@
       media: [
         {
           video: "images/portfolio/video/edificio-sao-jose/apresentacao.mp4",
+          poster: "images/portfolio/video/edificio-sao-jose/apresentacao.poster.webp",
           caption: "Edifício São José — Apresentação",
           note: "Vídeo imobiliário do Edifício São José, valorizando o empreendimento e sua presença na paisagem urbana.",
         },
@@ -208,6 +216,7 @@
       media: [
         {
           video: "images/portfolio/video/my-eyes/poster-design.mp4",
+          poster: "images/portfolio/video/my-eyes/poster-design.poster.webp",
           caption: "My Eyes — Poster Design",
           note: "Processo criativo de um pôster inspirado em “MY EYES”, acompanhando a construção no Photoshop até o resultado final.",
         },
@@ -221,6 +230,7 @@
       media: [
         {
           video: "images/portfolio/video/conteudo-autoral/momentos-2025.mp4",
+          poster: "images/portfolio/video/conteudo-autoral/momentos-2025.poster.webp",
           caption: "Momentos 2025 — Vlog",
           note: "Recorte de momentos de 2025 entre viagens, música, estrada e encontros, reunidos em uma edição curta e atmosférica.",
         },
@@ -509,7 +519,6 @@
   // Views
   const stages = {
     slider: document.getElementById("view-slider"),
-    list: document.getElementById("view-list"),
     videos: document.getElementById("view-videos"),
     services: document.getElementById("view-services"),
     about: document.getElementById("view-about"),
@@ -518,7 +527,6 @@
 
   const sectionMeta = {
     slider: { num: "01", label: "Projetos", hint: "— portfólio selecionado" },
-    list: { num: "01", label: "Projetos", hint: "— lista completa" },
     videos: { num: "02", label: "Vídeos", hint: "— edição e motion" },
     services: { num: "03", label: "Serviços", hint: "— o que eu entrego" },
     about: { num: "04", label: "Sobre", hint: "— quem faz o trabalho" },
@@ -538,16 +546,10 @@
     });
 
     document.querySelectorAll(".nav-item").forEach((btn) => {
-      const active =
-        btn.dataset.view === name ||
-        (btn.dataset.view === "slider" && (name === "slider" || name === "list"));
+      const active = btn.dataset.view === name;
       btn.classList.toggle("is-active", active);
       if (active) btn.setAttribute("aria-current", "page");
       else btn.removeAttribute("aria-current");
-    });
-
-    document.querySelectorAll(".mode-toggle button").forEach((btn) => {
-      btn.classList.toggle("is-active", btn.dataset.view === name);
     });
 
     const meta = sectionMeta[name] || sectionMeta.slider;
@@ -583,10 +585,6 @@
       swiper.slides.forEach((slide) => {
         const match = filter === "all" || slide.dataset.cat === filter;
         slide.style.display = match ? "" : "none";
-      });
-      document.querySelectorAll(".list-row").forEach((row) => {
-        const match = filter === "all" || row.dataset.cat === filter;
-        row.classList.toggle("is-filtered-out", !match);
       });
       swiper.update();
       swiper.slideTo(0);
@@ -660,32 +658,21 @@
         const video = document.createElement("video");
         video.controls = true;
         video.playsInline = true;
-        video.preload = "none";
         video.setAttribute("controlsList", "nodownload");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
         if (item.caption) video.setAttribute("aria-label", item.caption);
-        if (i === 0) {
-          video.preload = "metadata";
-          video.src = item.video;
-        } else {
-          video.dataset.src = item.video;
-        }
-        const ensureSrc = () => {
-          if (!video.src && video.dataset.src) {
-            video.src = video.dataset.src;
-            video.removeAttribute("data-src");
-            video.load();
-          }
-        };
+        const poster = item.poster || (item.video ? item.video.replace(/\.mp4$/i, ".poster.webp") : "");
+        if (poster) video.poster = poster;
+        // Keep src ready so mobile shows poster + can play quickly
+        video.preload = "metadata";
+        video.src = item.video;
         video.addEventListener("play", () => {
-          ensureSrc();
           lbGallery.querySelectorAll("video").forEach((other) => {
             if (other !== video) {
               try { other.pause(); } catch (_) {}
             }
           });
-        });
-        ["pointerdown", "touchstart"].forEach((evt) => {
-          video.addEventListener(evt, ensureSrc, { once: true, passive: true });
         });
         wrap.appendChild(video);
         lbGallery.appendChild(wrap);
