@@ -265,6 +265,10 @@ body.is-loading .stage {
   font-style: normal;
   font-weight: inherit;
 }
+.nav-item span,
+.nav-item em {
+  pointer-events: none;
+}
 .nav-item.is-active,
 .nav-item:hover { color: var(--ink); }
 .nav-item.is-active span { opacity: 1; }
