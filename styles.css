@@ -326,6 +326,7 @@ body.is-loading .stage {
   pointer-events: auto;
 }
 .stage[hidden] { display: none !important; }
+.stage:not(.is-active) { content-visibility: hidden; }
 
 .stage-bg {
   position: absolute;
@@ -337,9 +338,9 @@ body.is-loading .stage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(28px) saturate(0.85) brightness(0.35);
+  filter: blur(22px) saturate(0.85) brightness(0.35);
   transform: scale(1.12);
-  transition: opacity 0.6s ease;
+  transition: opacity 0.45s ease;
 }
 
 .title-layer {
@@ -366,7 +367,6 @@ body.is-loading .stage {
   max-width: 34vw;
   overflow: visible;
   white-space: nowrap;
-  will-change: transform;
   padding-inline: 0.08em;
 }
 .title-left {
@@ -1125,6 +1125,14 @@ body.is-loading .stage {
   }
   .nav-item.is-active span { opacity: 1; }
   .section-chip { display: none; }
+  .stage-bg img {
+    filter: blur(10px) saturate(0.8) brightness(0.32);
+    transform: scale(1.08);
+  }
+  .video-item-play {
+    backdrop-filter: none;
+    background: rgba(18, 18, 16, 0.72);
+  }
   .work-swiper {
     padding: 9.25rem 0 6rem;
   }
