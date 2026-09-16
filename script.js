@@ -185,8 +185,8 @@
       loader.style.visibility = "hidden";
       loader.setAttribute("aria-hidden", "true");
     }
-    // Ensure mobile UI is interactive after reveal
-    gsap.set([".topbar", ".chrome", ".section-chip", ".stage.is-active", ".frame", ".slide-caption", ".stage-bg"], {
+    // Ensure UI is interactive after reveal
+    gsap.set([".topbar", ".chrome", ".section-chip", ".stage.is-active", ".frame", ".slide-caption", ".stage-bg", ".nav-item", ".top-cta", ".brand"], {
       clearProps: "opacity,transform,pointerEvents",
     });
   };
