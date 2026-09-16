@@ -136,6 +136,57 @@
         "images/portfolio/branding/viane/17.webp",
       ],
     },
+    "fc-plus": {
+      title: "FC+",
+      label: "Edição de vídeo · Conteúdo institucional",
+      description:
+        "Série institucional para a FC+ — estratégia de marca, identidade visual e bastidores criativos com ritmo e narrativa claros.",
+      media: [
+        { video: "images/portfolio/video/fc-plus/estrategia-marca.mp4", caption: "FC+ — Estratégia de Marca" },
+        { video: "images/portfolio/video/fc-plus/identidade-visual.mp4", caption: "FC+ — Identidade Visual" },
+        { video: "images/portfolio/video/fc-plus/bastidores-criativos.mp4", caption: "FC+ — Bastidores Criativos" },
+      ],
+    },
+    "western-co": {
+      title: "Western&Co",
+      label: "Edição de vídeo · Moda e publicidade",
+      description:
+        "Campanhas de moda western com peças de produto e lookbook — botas, jaqueta de franjas e looks em ritmo publicitário.",
+      media: [
+        { video: "images/portfolio/video/western-co/botas-texanas.mp4", caption: "Western&Co — Botas Texanas" },
+        { video: "images/portfolio/video/western-co/jaqueta-franjas.mp4", caption: "Western&Co — Jaqueta de Franjas" },
+        { video: "images/portfolio/video/western-co/look-cowgirl.mp4", caption: "Western&Co — Look Cowgirl" },
+        { video: "images/portfolio/video/western-co/look-rosa.mp4", caption: "Western&Co — Look Rosa" },
+      ],
+    },
+    "edificio-sao-jose": {
+      title: "Edifício São José",
+      label: "Edição de vídeo · Arquitetura e imobiliário",
+      description:
+        "Apresentação audiovisual do Edifício São José — arquitetura e imobiliário com leitura cinematográfica do espaço.",
+      media: [
+        { video: "images/portfolio/video/edificio-sao-jose/apresentacao.mp4", caption: "Edifício São José — Apresentação" },
+      ],
+    },
+    "my-eyes": {
+      title: "My Eyes",
+      label: "Edição de vídeo · Motion design",
+      description:
+        "Motion design e cultura pop — poster design animado com timing preciso e presença visual forte.",
+      media: [
+        { video: "images/portfolio/video/my-eyes/poster-design.mp4", caption: "My Eyes — Poster Design" },
+      ],
+    },
+    "conteudo-autoral": {
+      title: "Conteúdo autoral",
+      label: "Edição de vídeo · Vlog e lifestyle",
+      description:
+        "Conteúdo autoral e lifestyle — Life Is Short e Momentos 2025, com edição linear, ritmo e narrativa pessoal.",
+      media: [
+        { video: "images/portfolio/video/conteudo-autoral/life-is-short.mp4", caption: "Life Is Short — Lifestyle" },
+        { video: "images/portfolio/video/conteudo-autoral/momentos-2025.mp4", caption: "Momentos 2025 — Vlog" },
+      ],
+    },
   };
 
   const yearEl = document.getElementById("year");
@@ -525,6 +576,26 @@
         lbGallery.appendChild(wrap);
         return;
       }
+      if (item && typeof item === "object" && item.video) {
+        const wrap = document.createElement("div");
+        wrap.className = "lb-native-video";
+        const video = document.createElement("video");
+        video.src = item.video;
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = i === 0 ? "metadata" : "none";
+        video.setAttribute("controlsList", "nodownload");
+        if (item.caption) video.setAttribute("aria-label", item.caption);
+        wrap.appendChild(video);
+        if (item.caption) {
+          const cap = document.createElement("p");
+          cap.className = "lb-video-caption mono";
+          cap.textContent = item.caption;
+          wrap.appendChild(cap);
+        }
+        lbGallery.appendChild(wrap);
+        return;
+      }
       const img = document.createElement("img");
       img.src = item;
       img.alt = `${project.title} ${i + 1}`;
@@ -532,11 +603,15 @@
       lbGallery.appendChild(img);
     });
     if (project.video) {
+      const wrap = document.createElement("div");
+      wrap.className = "lb-native-video";
       const video = document.createElement("video");
       video.src = project.video;
       video.controls = true;
       video.playsInline = true;
-      lbGallery.appendChild(video);
+      video.preload = "metadata";
+      wrap.appendChild(video);
+      lbGallery.appendChild(wrap);
     }
     if (project.url) {
       const end = document.createElement("div");
@@ -551,6 +626,9 @@
 
   const closeLightbox = () => {
     if (!lightbox || lightbox.hidden) return;
+    lbGallery.querySelectorAll("video").forEach((v) => {
+      try { v.pause(); } catch (_) {}
+    });
     lightbox.hidden = true;
     document.body.style.overflow = "";
     lbGallery.innerHTML = "";
