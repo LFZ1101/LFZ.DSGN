@@ -623,14 +623,6 @@
       if (item && typeof item === "object" && item.video) {
         const wrap = document.createElement("div");
         wrap.className = "lb-native-video";
-        const video = document.createElement("video");
-        video.src = item.video;
-        video.controls = true;
-        video.playsInline = true;
-        video.preload = i === 0 ? "metadata" : "none";
-        video.setAttribute("controlsList", "nodownload");
-        if (item.caption) video.setAttribute("aria-label", item.caption);
-        wrap.appendChild(video);
         if (item.caption || item.note) {
           const meta = document.createElement("div");
           meta.className = "lb-video-meta";
@@ -648,6 +640,14 @@
           }
           wrap.appendChild(meta);
         }
+        const video = document.createElement("video");
+        video.src = item.video;
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = i === 0 ? "metadata" : "none";
+        video.setAttribute("controlsList", "nodownload");
+        if (item.caption) video.setAttribute("aria-label", item.caption);
+        wrap.appendChild(video);
         lbGallery.appendChild(wrap);
         return;
       }
