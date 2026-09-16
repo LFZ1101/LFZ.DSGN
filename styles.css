@@ -989,7 +989,7 @@ body.drawer-open .section-chip {
     padding-bottom: 0.9rem;
   }
   .section-chip {
-    top: calc(5.15rem + env(safe-area-inset-top, 0px));
+    top: calc(5.6rem + env(safe-area-inset-top, 0px));
     left: 1rem;
     transform: none;
     max-width: calc(100% - 2rem);
@@ -1028,7 +1028,7 @@ body.drawer-open .section-chip {
   html, body { overflow: hidden; }
   body.is-panel-scroll { overflow: auto; }
   .section-chip {
-    top: calc(5.35rem + env(safe-area-inset-top, 0px));
+    top: calc(5.85rem + env(safe-area-inset-top, 0px));
     left: 1rem;
     transform: none;
     max-width: calc(100% - 2rem);
