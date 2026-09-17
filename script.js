@@ -682,7 +682,8 @@
         const stage = document.createElement("div");
         stage.className = "lb-video-stage";
         const video = document.createElement("video");
-        video.controls = true;
+        // Controls appear after the first intentional play tap (avoids double-tap on mobile)
+        video.controls = false;
         video.playsInline = true;
         video.setAttribute("controlsList", "nodownload");
         video.setAttribute("playsinline", "");
@@ -697,8 +698,10 @@
         }
         video.src = item.video;
         stage.appendChild(video);
+
+        let cover = null;
         if (poster) {
-          const cover = document.createElement("img");
+          cover = document.createElement("img");
           cover.className = "lb-video-cover";
           cover.src = poster;
           cover.alt = "";
@@ -706,17 +709,49 @@
           cover.loading = "eager";
           if (i < 2) cover.fetchPriority = "high";
           stage.appendChild(cover);
-          const hideCover = () => cover.classList.add("is-hidden");
-          video.addEventListener("playing", hideCover, { once: true });
-          video.addEventListener("play", hideCover, { once: true });
         }
-        video.addEventListener("play", () => {
+
+        const playOverlay = document.createElement("button");
+        playOverlay.type = "button";
+        playOverlay.className = "lb-video-play";
+        playOverlay.setAttribute(
+          "aria-label",
+          item.caption ? `Reproduzir ${item.caption}` : "Reproduzir vídeo"
+        );
+        playOverlay.innerHTML = "<span aria-hidden=\"true\"></span>";
+        stage.appendChild(playOverlay);
+
+        const revealPlayer = () => {
+          playOverlay.classList.add("is-hidden");
+          stage.classList.add("is-playing");
+          cover?.classList.add("is-hidden");
+          video.controls = true;
+        };
+
+        const startPlayback = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          revealPlayer();
           lbGallery.querySelectorAll("video").forEach((other) => {
             if (other !== video) {
               try { other.pause(); } catch (_) {}
             }
           });
-        });
+          // First tap must play — preload=none needs load under the same gesture
+          if (video.readyState < 2) {
+            video.preload = "auto";
+            try { video.load(); } catch (_) {}
+          }
+          const attempt = video.play();
+          if (attempt && typeof attempt.catch === "function") {
+            attempt.catch(() => revealPlayer());
+          }
+        };
+
+        playOverlay.addEventListener("click", startPlayback);
+        cover?.addEventListener("click", startPlayback);
+        video.addEventListener("playing", revealPlayer);
+        video.addEventListener("play", revealPlayer);
         wrap.appendChild(stage);
         lbGallery.appendChild(wrap);
         return;
