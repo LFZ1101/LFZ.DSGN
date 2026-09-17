@@ -751,8 +751,13 @@ body.is-loading .stage {
   text-align: left;
   background: #161614;
   transition: background 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
-.video-item:hover { background: #1c1c19; }
+@media (hover: hover) and (pointer: fine) {
+  .video-item:hover { background: #1c1c19; }
+  .video-item:hover .video-item-media img { transform: scale(1.04); }
+}
 .video-item-media {
   position: relative;
   display: block;
@@ -766,7 +771,6 @@ body.is-loading .stage {
   object-fit: cover;
   transition: transform 0.7s var(--ease);
 }
-.video-item:hover .video-item-media img { transform: scale(1.04); }
 .video-item-play {
   position: absolute;
   left: 50%;
@@ -991,17 +995,68 @@ body.is-loading .stage {
   border: 1px solid var(--line);
   padding: 0.85rem 0.85rem 1rem;
 }
-.lb-native-video video {
+.lb-video-stage {
+  position: relative;
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  background: #0a0a09;
+}
+.lb-video-stage video,
+.lb-video-cover,
+.lb-video-play {
+  grid-area: 1 / 1;
+}
+.lb-video-stage video,
+.lb-video-cover {
   width: auto;
   max-width: 100%;
   max-height: min(72vh, 820px);
   height: auto;
-  background: #000;
   object-fit: contain;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
+.lb-video-stage video {
+  position: relative;
+  z-index: 1;
+  background: #000;
+}
+.lb-video-cover {
+  z-index: 2;
+  pointer-events: auto;
+  cursor: pointer;
+  background: #0a0a09;
+}
+.lb-video-play {
+  place-self: center;
+  z-index: 3;
+  width: 4.25rem;
+  height: 4.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(10, 10, 9, 0.55);
+  color: #fff6df;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: 0 0 0 1px rgba(255, 246, 223, 0.28);
+}
+.lb-video-play span {
+  display: block;
+  width: 0;
+  height: 0;
+  margin-left: 0.2rem;
+  border-style: solid;
+  border-width: 0.55rem 0 0.55rem 0.95rem;
+  border-color: transparent transparent transparent currentColor;
+}
+.lb-video-play:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.lb-video-cover.is-hidden,
+.lb-video-play.is-hidden { display: none; }
 .lb-video-meta {
   width: min(100%, 34rem);
   display: grid;
@@ -1228,9 +1283,14 @@ body.is-loading .stage {
   .lb-native-video {
     padding: 0.55rem 0.55rem 0.85rem;
   }
-  .lb-native-video video {
+  .lb-video-stage video,
+  .lb-video-cover {
     max-height: min(58vh, 560px);
     width: 100%;
+  }
+  .lb-video-play {
+    width: 4.75rem;
+    height: 4.75rem;
   }
   .lb-video-meta {
     text-align: left;

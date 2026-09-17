@@ -562,6 +562,20 @@
     chrome?.classList.toggle("is-panel-mode", panelViews.has(name));
     document.body.classList.toggle("is-panel-scroll", panelViews.has(name));
 
+    if (name === "videos") {
+      Object.values(projects).forEach((project) => {
+        (project.media || []).forEach((item) => {
+          const poster = item && typeof item === "object"
+            ? (item.poster || (item.video ? item.video.replace(/\.mp4$/i, ".poster.webp") : ""))
+            : "";
+          if (!poster) return;
+          const warm = new Image();
+          warm.decoding = "async";
+          warm.src = poster;
+        });
+      });
+    }
+
     if (name === "slider") requestAnimationFrame(() => swiper.update());
   };
 
@@ -617,6 +631,16 @@
       }
     }
     lbGallery.innerHTML = "";
+    // Warm poster frames so mobile lightbox never opens on a black player
+    project.media.forEach((item) => {
+      const poster = item && typeof item === "object"
+        ? (item.poster || (item.video ? item.video.replace(/\.mp4$/i, ".poster.webp") : ""))
+        : "";
+      if (!poster) return;
+      const warm = new Image();
+      warm.decoding = "async";
+      warm.src = poster;
+    });
     project.media.forEach((item, i) => {
       if (item && typeof item === "object" && item.youtube) {
         const wrap = document.createElement("div");
@@ -655,26 +679,80 @@
           }
           wrap.appendChild(meta);
         }
+        const stage = document.createElement("div");
+        stage.className = "lb-video-stage";
         const video = document.createElement("video");
-        video.controls = true;
+        // Controls appear after the first intentional play tap (avoids double-tap on mobile)
+        video.controls = false;
         video.playsInline = true;
         video.setAttribute("controlsList", "nodownload");
         video.setAttribute("playsinline", "");
         video.setAttribute("webkit-playsinline", "");
         if (item.caption) video.setAttribute("aria-label", item.caption);
         const poster = item.poster || (item.video ? item.video.replace(/\.mp4$/i, ".poster.webp") : "");
-        if (poster) video.poster = poster;
-        // Keep src ready so mobile shows poster + can play quickly
-        video.preload = "metadata";
+        // Keep poster visible until play (avoids black first-frame flash on mobile)
+        video.preload = "none";
+        if (poster) {
+          video.poster = poster;
+          video.setAttribute("poster", poster);
+        }
         video.src = item.video;
-        video.addEventListener("play", () => {
+        stage.appendChild(video);
+
+        let cover = null;
+        if (poster) {
+          cover = document.createElement("img");
+          cover.className = "lb-video-cover";
+          cover.src = poster;
+          cover.alt = "";
+          cover.decoding = "async";
+          cover.loading = "eager";
+          if (i < 2) cover.fetchPriority = "high";
+          stage.appendChild(cover);
+        }
+
+        const playOverlay = document.createElement("button");
+        playOverlay.type = "button";
+        playOverlay.className = "lb-video-play";
+        playOverlay.setAttribute(
+          "aria-label",
+          item.caption ? `Reproduzir ${item.caption}` : "Reproduzir vídeo"
+        );
+        playOverlay.innerHTML = "<span aria-hidden=\"true\"></span>";
+        stage.appendChild(playOverlay);
+
+        const revealPlayer = () => {
+          playOverlay.classList.add("is-hidden");
+          stage.classList.add("is-playing");
+          cover?.classList.add("is-hidden");
+          video.controls = true;
+        };
+
+        const startPlayback = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          revealPlayer();
           lbGallery.querySelectorAll("video").forEach((other) => {
             if (other !== video) {
               try { other.pause(); } catch (_) {}
             }
           });
-        });
-        wrap.appendChild(video);
+          // First tap must play — preload=none needs load under the same gesture
+          if (video.readyState < 2) {
+            video.preload = "auto";
+            try { video.load(); } catch (_) {}
+          }
+          const attempt = video.play();
+          if (attempt && typeof attempt.catch === "function") {
+            attempt.catch(() => revealPlayer());
+          }
+        };
+
+        playOverlay.addEventListener("click", startPlayback);
+        cover?.addEventListener("click", startPlayback);
+        video.addEventListener("playing", revealPlayer);
+        video.addEventListener("play", revealPlayer);
+        wrap.appendChild(stage);
         lbGallery.appendChild(wrap);
         return;
       }
